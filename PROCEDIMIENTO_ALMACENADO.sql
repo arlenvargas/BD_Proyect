@@ -261,13 +261,13 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearEstante (@IdEstante varchar(2), @TamCentimetros varchar(5), @IdAlmecen varchar(5))
+CREATE PROC CrearEstante (@NombreEstante varchar(2), @TamCentimetros varchar(15), @IdAlmecen varchar(15))
 AS
-	IF ((@IdEstante = '') OR (@TamCentimetros = '') OR (@IdAlmecen = ''))
+	IF ((@NombreEstante = '') OR (@TamCentimetros = '') OR (@IdAlmecen = ''))
 		BEGIN
 			PRINT 'LOS CAMPOS NO DEBEN DE SER NULOS'
 		END
-	ELSE IF (len(@IdEstante) != 2)
+	ELSE IF (len(@NombreEstante) != 2)
 		BEGIN
 			PRINT 'EL ID DE ESTANTE DEBE SER DE DOS CARACTERES'
 		END
@@ -279,18 +279,14 @@ AS
 	    BEGIN
             PRINT 'EL ID ALMACEN DEBE SER DATOS NUMERICOS'
         END
-	ELSE IF (EXISTS(SELECT IdEstante FROM Estantes WHERE IdEstante=@IdEstante))
-		BEGIN
-			PRINT 'EL ESTANTE YA EXISTE'
-		END
 	ELSE IF NOT EXISTS(SELECT NumAlmacen FROM Almacenes WHERE NumAlmacen = CONVERT(int, @IdAlmecen))
 		BEGIN
 			PRINT 'EL ID DEL ALMACEN NO EXISTE'
 		END
 	ELSE
 		BEGIN
-			INSERT INTO Estantes(IdEstante, TamCentimetros,IdAlmecen)
-			Values (@IdEstante, CONVERT(float, @TamCentimetros), CONVERT(int, @IdAlmecen))
+			INSERT INTO Estantes(NombreEstante, TamCentimetros,IdAlmecen)
+			Values (@NombreEstante, CONVERT(float, @TamCentimetros), CONVERT(int, @IdAlmecen))
 			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
 		END
 GO
@@ -299,13 +295,13 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearIngredientes (@NombreIngrediente varchar(30), @CantidadIngrediente varchar(5), @IdEstante varchar(2))
+CREATE PROC CrearIngredientes (@NombreIngrediente varchar(30), @CantidadIngrediente varchar(10), @IdEstante varchar(10))
 AS
 	IF (@NombreIngrediente = '' OR @CantidadIngrediente = '' OR @IdEstante = '')
 		BEGIN
 			PRINT 'NO SE PERMITEN CAMPOS NULOS'
 		END
-	ELSE IF((ISNUMERIC(@CantidadIngrediente) = 0) OR (CONVERT(int, @CantidadIngrediente) < 0))
+	ELSE IF((ISNUMERIC(@CantidadIngrediente) = 0) OR (CONVERT(int, @CantidadIngrediente) < 0) OR (ISNUMERIC(@IdEstante) = 0))
 		BEGIN 
 			PRINT 'ESTE CAMPO SOLO DEBE SER DATOS NUMERICOS Y NO PUEDE SER NEGATIVO'
 		END
@@ -316,7 +312,7 @@ AS
 	ELSE
 		BEGIN
 			INSERT INTO Ingredientes (NombreIngrediente, CantidadIngrediente, IdEstante)
-			VALUES (@NombreIngrediente, CONVERT(int, @CantidadIngrediente), @IdEstante)
+			VALUES (@NombreIngrediente, CONVERT(int, @CantidadIngrediente), CONVERT(int, @IdEstante))
 			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
 		END
 GO
@@ -325,7 +321,7 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearPlatoIngredientes (@CantidadIngrediente varchar(5), @IdIngrediente varchar(5), @IdPlato varchar(5))
+CREATE PROC CrearPlatoIngredientes (@CantidadIngrediente varchar(8), @IdIngrediente varchar(8), @IdPlato varchar(5))
 AS
 	IF ((@CantidadIngrediente = '') OR (@IdIngrediente='') OR (@IdPlato = ''))
 		BEGIN
@@ -387,51 +383,9 @@ AS
 			VALUES (CONVERT(int, @IdPlato), CONVERT(int, @IdCocinero))
 			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
 		END
-GO
-
-/*------------------------------------------------------------------------------------------------------------------------------*/ 
-
-USE CIELOAZUL
-GO
-CREATE PROC CrearPrepararPlato (@IdConocePlato varchar(5), @IdPlato varchar(5))
-AS
-	IF ((@IdConocePlato = '') OR (@IdPlato=''))
-		BEGIN
-			PRINT 'ESTOS CAMPOS NO PUEDEN SER NULOS'
-		END
-	ELSE IF((ISNUMERIC(@IdConocePlato) = 0) OR (ISNUMERIC(@IdPlato) = 0))
-	    BEGIN
-            PRINT 'ESTOS CAMPOS DEBEN SER NUMERICOS'
-        END
-	ELSE IF((CONVERT(int, @IdConocePlato) < 0) OR (CONVERT(int, @IdPlato) < 0))
-		BEGIN
-			PRINT 'ESTE CAMPO NO PUEDE SER NEGATIVO'
-		END
-	ELSE IF NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = CONVERT(int, @IdPlato))
-		BEGIN
-			PRINT 'EL PLATO NO EXISTE'
-		END
-	ELSE IF NOT EXISTS(SELECT IdConocePlato FROM ConocePlato WHERE IdConocePlato = CONVERT(int, @IdConocePlato))
-		BEGIN
-			PRINT 'EL ID DEL CONOCE PLATO NO EXISTE'
-		END
-	ELSE
-		BEGIN
-			INSERT INTO PreparaPlato(IdConocePlato, IdPlato)
-			VALUES (CONVERT(int, @IdConocePlato), CONVERT(int, @IdPlato))
-			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
-		END
-GO
-
-
-
-
--------------------------------------------------------Crear conoce plato ------------------------------------------------------
-
-
+GO 
 
 -----------------------------------Restar Ingredientes ----------------------------------------------
-
 USE CIELOAZUL
 GO
 CREATE PROC SP_ActualizaIngredientes (@IdPlato varchar(5))
@@ -483,11 +437,7 @@ AS
 		END
 GO
 
-
-
-
-------------------------------------------------------------------Validar existencia ingredientes------------------------------------------------------------
-
+----------------------------------------------------Validar existencia ingredientes------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_VerificaIngredientes (@IdPlato varchar(5))
@@ -540,12 +490,7 @@ GO
 
 USE CIELOAZUL
 GO
-
-
-
--------------------------------------------------------Crear Preparar plato ----------------------------------------------------
-
-
+---------------------------------------------------Crear Preparar plato ----------------------------------------------------
 USE CIELOAZUL
 GO
 
@@ -583,8 +528,6 @@ AS
 		END
 GO
   
-
-  EXEC PrepararPlato 1,1
 
 
 

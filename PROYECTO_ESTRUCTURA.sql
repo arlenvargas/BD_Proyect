@@ -117,12 +117,12 @@
 	USE CIELOAZUL
 	GO 
 	CREATE TABLE Estantes (
-		IdEstante varchar(2) NOT NULL,
+		IdEstante int IDENTITY (1,1) NOT NULL,
+		NombreEstante varchar(2) NOT NULL,
 		TamCentimetros float NOT NULL,
 		IdAlmecen int NOT NULL,
 		CONSTRAINT PK_IdEstante PRIMARY KEY (IdEstante),
 		CONSTRAINT FK_Almacen_Estante FOREIGN KEY (IdAlmecen) REFERENCES Almacenes(NumAlmacen),
-		CONSTRAINT CK_IdEstante CHECK(len(IdEstante) = 2)
 	)
 	GO
 
@@ -132,7 +132,7 @@
 		IdIngrediente int  IDENTITY (1,1) NOT NULL,
 		NombreIngrediente varchar(30) NOT NULL,
 		CantidadIngrediente int NOT NULL,
-		IdEstante varchar(2) NOT NULL,
+		IdEstante int NOT NULL,
 		CONSTRAINT PK_IdIngrediente PRIMARY KEY (IdIngrediente),
 		CONSTRAINT FK_IdEstante_Ingredientes FOREIGN KEY (IdEstante) REFERENCES Estantes(IdEstante)
 	)
