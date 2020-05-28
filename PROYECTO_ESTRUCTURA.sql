@@ -3,13 +3,13 @@
 	CREATE DATABASE  CIELOAZUL
 	ON PRIMARY
 	(NAME = 'CIELOAZUL_Data',
-	FILENAME= 'R:\SQLData\CIELOAZUL_Data.Mdf',
+	FILENAME= 'C:\SQLData\CIELOAZUL_Data.Mdf',
 	SIZE = 5Mb,
 	MAXSIZE = 10Mb,
 	FILEGROWTH = 1Mb)
 	LOG ON
 	(NAME = 'CIELOAZUL_Log',
-	FILENAME= 'R:\SQLLog\CIELOAZUL_Log.Ldf',
+	FILENAME= 'C:\SQLLog\CIELOAZUL_Log.Ldf',
 	SIZE = 5Mb,
 	MAXSIZE = 10Mb,
 	FILEGROWTH = 1Mb)
@@ -60,9 +60,7 @@
 		IdPlato int IDENTITY (1,1) NOT NULL,
 		NombrePlato varchar(50) NOT NULL,
 		Precio money NOT NULL,
-		IdCocinero int NOT NULL,
 		CONSTRAINT PK_IdPlato PRIMARY KEY (IdPlato),
-		CONSTRAINT FK_IdPlato_Cocinero FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero)
 	)
 	GO
 
