@@ -49,9 +49,13 @@ AS
 GO
 
 
+
+
+
 USE CIELOAZUL
 GO
-CREATE PROC PrepararPlato (@IdConocePlato varchar(5), @IdPlato varchar(5))
+
+CREATE PROC CrearPrepararPlato (@IdConocePlato varchar(5), @IdPlato varchar(5))
 AS
 	IF ((@IdConocePlato = '') OR (@IdPlato = ''))
 		BEGIN
@@ -96,6 +100,6 @@ GO
 
 
 
-  ---------------------------------Verificar ingredientes----------------------------------------------
+
 
 	
