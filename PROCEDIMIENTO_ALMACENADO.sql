@@ -141,22 +141,22 @@ AS
 		END
     ELSE IF EXISTS(SELECT IdPlato FROM Entrantes WHERE IdPlato = @IdPlato)
 		BEGIN
-			PRINT 'El plato ya es un entrante'
+			PRINT 'EL PLATO YA ES UN ENTRANTE'
 		    RETURN 1
 		END
     ELSE IF EXISTS(SELECT IdPlato FROM PrimerPlato WHERE IdPlato = @IdPlato)
 		BEGIN
-			PRINT 'El plato ya es un entrante'
+			PRINT 'EL PLATO YA ES UN PRIMER PLATO'
 		    RETURN 1
 		END
     ELSE IF EXISTS(SELECT IdPlato FROM SegundoPlato WHERE IdPlato = @IdPlato)
 		BEGIN
-			PRINT 'El plato ya es un entrante'
+			PRINT 'EL PLATO YA ES UN SEGUNDO PLATO'
 		    RETURN 1
 		END
     ELSE IF EXISTS(SELECT IdPlato FROM Postres WHERE IdPlato = @IdPlato)
 		BEGIN
-			PRINT 'El plato ya es un entrante'
+			PRINT 'EL PLATO YA ES UN POSTRE'
 		    RETURN 1
 		END
     ELSE
@@ -202,6 +202,7 @@ USE CIELOAZUL
 GO
 CREATE PROC CrearPrimerPlato (@IdPlato varchar(5))
 AS
+	DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
 		BEGIN
 			PRINT 'EL ID DEL PLATO NO DEBE SER NULO'
@@ -216,9 +217,13 @@ AS
 		END
 	ELSE
 		BEGIN
-			INSERT INTO PrimerPlato(IdPlato)
-			VALUES (CONVERT(int, @IdPlato))
-			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+			EXEC @hasCategory = SP_valida_plato_tiene_categoria @IdPlato;
+		    IF (@hasCategory = 0)
+				BEGIN
+					INSERT INTO PrimerPlato(IdPlato)
+					VALUES (CONVERT(int, @IdPlato))
+					PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+				END
 		END
 GO
 
@@ -228,6 +233,7 @@ USE CIELOAZUL
 GO
 CREATE PROC CrearSegundoPlato (@IdPlato varchar(5))
 AS
+	DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
 		BEGIN
 			print 'EL ID DEL PLATO NO DEBE SER NULO'
@@ -242,9 +248,13 @@ AS
 		END
 	ELSE
 		BEGIN
-			INSERT INTO SegundoPlato(IdPlato)
-			VALUES (CONVERT(int, @IdPlato))
-			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+			EXEC @hasCategory = SP_valida_plato_tiene_categoria @IdPlato;
+		    IF (@hasCategory = 0)
+				BEGIN
+					INSERT INTO SegundoPlato(IdPlato)
+					VALUES (CONVERT(int, @IdPlato))
+					PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+				END
 		END
 GO
 
@@ -254,6 +264,7 @@ USE CIELOAZUL
 GO
 CREATE PROC CrearPostre (@IdPlato varchar(5))
 AS
+	DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
 		BEGIN
 			PRINT 'EL ID DEL PLATO NO DEBE DE SER NULO'
@@ -268,9 +279,13 @@ AS
 		END
 	ELSE
 		BEGIN
-			INSERT INTO Postres(IdPlato)
-			VALUES (CONVERT(int, @IdPlato))
-			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+			EXEC @hasCategory = SP_valida_plato_tiene_categoria @IdPlato;
+		    IF (@hasCategory = 0)
+				BEGIN
+					INSERT INTO Postres(IdPlato)
+					VALUES (CONVERT(int, @IdPlato))
+					PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+				END
 		END
 GO
 

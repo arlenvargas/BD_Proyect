@@ -42,7 +42,7 @@ EXEC CrearPlato 'Pastel de chocolate', 2500
 --SELECT IdPlato,NombrePlato,Precio  FROM Platos
 
 --Crear Entrantes
-EXEC CrearPlatoEntrante 1 
+EXEC CrearPlatoEntrante 1
 EXEC CrearPlatoEntrante 2
 --SELECT IdEntrante, IdPlato FROM Entrantes 
 
@@ -81,16 +81,16 @@ EXEC CrearEstante 'AD', 86.30,  10
 --SELECT IdEstante, NombreEstante, TamCentimetros, IdAlmecen FROM Estantes
 
 --Crear Ingredientes
-EXEC CrearIngredientes 'Tomate', 100, 1
-EXEC CrearIngredientes 'Queso', 30, 1
-EXEC CrearIngredientes 'Cebolla', 82, 2
-EXEC CrearIngredientes 'Carnes', 90, 2
+EXEC CrearIngredientes 'Tomate', 70, 1
+EXEC CrearIngredientes 'Queso', 70, 1
+EXEC CrearIngredientes 'Cebolla', 70, 2
+EXEC CrearIngredientes 'Carnes', 70, 2
 EXEC CrearIngredientes 'Harina', 70, 3
-EXEC CrearIngredientes 'Arroz', 150, 4
-EXEC CrearIngredientes 'Leche', 40, 5
-EXEC CrearIngredientes 'Cacao', 100, 6
-EXEC CrearIngredientes 'Frijoles', 140, 7
-EXEC CrearIngredientes 'Chile', 30, 8
+EXEC CrearIngredientes 'Arroz', 70, 4
+EXEC CrearIngredientes 'Leche', 70, 5
+EXEC CrearIngredientes 'Cacao', 70, 6
+EXEC CrearIngredientes 'Frijoles', 70, 7
+EXEC CrearIngredientes 'Chile', 70, 8
 --SELECT IdIngrediente, NombreIngrediente, CantidadIngrediente, IdEstante FROM Ingredientes
 
 
@@ -104,15 +104,15 @@ EXEC CrearPlatoIngredientes 10, 5, 3
 --SELECT IdPlatoIngrediente, CantidadIngrediente, IdIngrediente, IdPlato FROM PlatoIngredientes
 
 --Crear Conoce Plato
-EXEC CrearConocePlato 3, 1
-EXEC CrearConocePlato 6, 2
-EXEC CrearConocePlato 7, 3
+EXEC CrearConocePlato 3, 1												--Plato 3 con el cocinero 1
+EXEC CrearConocePlato 6, 2												--Plato 6 con el cocinero 2
+EXEC CrearConocePlato 7, 3												--Plato 7 con el cocinero 3
 --SELECT IdConocePlato, IdPlato, IdCocinero FROM ConocePlato
 
 --Crear Preparar Plato
-EXEC CrearPrepararPlato 1, 3 
-EXEC CrearPrepararPlato 2, 6 
-EXEC CrearPrepararPlato 3, 7
+EXEC CrearPrepararPlato 1, 3											--Conoce Plato 1 con el Plato 3
+EXEC CrearPrepararPlato 2, 6											--Conoce Plato 2 con el Plato 6
+EXEC CrearPrepararPlato 3, 7											--Conoce Plato 3 con el Plato 7
 
 
 --SELECT IdPreparaPlato, IdConocePlato, IdPlato FROM PreparaPlato
