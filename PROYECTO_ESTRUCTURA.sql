@@ -49,8 +49,8 @@
 		FechaNacimiento date NOT NULL,
 		IdEmpleado varchar(12) NOT NULL,
 		CONSTRAINT PK_IdPinche PRIMARY KEY (IdPinche),
-		CONSTRAINT FK_IdEmpleado_Pinche FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni),
-		CONSTRAINT FK_IdCocinero_P FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero) ON DELETE CASCADE
+		CONSTRAINT FK_IdEmpleado_Pinche FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni) ON DELETE CASCADE,
+		CONSTRAINT FK_Cocinero_Pinche FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero) ON DELETE NO ACTION,
 	)
 	GO
 
@@ -169,13 +169,14 @@
         IdConocePlato int NOT NULL,
         IdPlato int NOT NULL,
         CONSTRAINT PK_IdPreparaPlato PRIMARY KEY (IdPreparaPlato),
-        CONSTRAINT FK_IdConocePlato FOREIGN KEY (IdConocePlato) REFERENCES ConocePlato(IdConocePlato) ON DELETE CASCADE,
-        CONSTRAINT FK_IdPreparaPlato_Plato FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato),
+        CONSTRAINT FK_IdConocePlato FOREIGN KEY (IdConocePlato) REFERENCES ConocePlato(IdConocePlato)  ON DELETE CASCADE,
+        CONSTRAINT FK_IdPreparaPlato_Plato FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE NO ACTION,
     )
 	GO
 
 	USE CIELOAZUL
 	GO 
+
 	CREATE TABLE Auditoria(
 		IdAuditoria int IDENTITY (1,1) NOT NULL,
 		Usuario varchar(20),

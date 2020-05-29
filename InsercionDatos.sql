@@ -17,8 +17,6 @@ EXEC CrearEmpleado '1454755','Emilio','Elisondo', 'Carrillo',10324, '26652525', 
 DELETE FROM Empleados WHERE Empleados.Dni = '504190041'
 USE CIELOAZUL
 GO
-DELETE FROM Empleados WHERE Empleados.Dni = 504190041 
-
 --crear Cocineros
 EXEC CrearCocineros 5, '504190041'
 EXEC CrearCocineros 8,'15454879'
@@ -45,10 +43,7 @@ EXEC CrearPlato 'Bistec con cebolla', 3500
 EXEC CrearPlato 'Chuleta', 3000
 EXEC CrearPlato 'Helado de Fresa', 1400
 EXEC CrearPlato 'Helado de vainilla', 1400
-EXEC CrearPlato 'Pastel de chocolate', 2500
 --SELECT IdPlato,NombrePlato,Precio  FROM Platos
-
-DELETE FROM Platos WHERE Platos.IdPlato = 6 
 
 --Crear Entrantes
 EXEC CrearPlatoEntrante 1
@@ -76,7 +71,8 @@ EXEC CrearPostre 10
 EXEC CrearAlmacen 5, 'Almacen Liberia', 'Ubicado en liberia centro'
 EXEC CrearAlmacen 10, 'Almacen Nicoya', 'Ubicado en Nicoya centro'
 --SELECT NumAlmacen, Nombre, Descripcion FROM Almacenes
- DELETE FROM Almacenes WHERE Almacenes.NumAlmacen = 5
+ 
+
 --Crear Estante
 EXEC CrearEstante 'AA', 100.15, 5
 EXEC CrearEstante 'AB', 95.25,  5
