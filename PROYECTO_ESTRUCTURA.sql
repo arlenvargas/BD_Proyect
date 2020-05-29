@@ -36,9 +36,8 @@
 		AnniosServicio int NOT NULL,
 		IdEmpleado varchar(12) NOT NULL,
 		CONSTRAINT PK_IdCocinero PRIMARY KEY (IdCocinero),
-		CONSTRAINT FK_IdEmpleado_Cocinero FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni),
+		CONSTRAINT FK_IdEmpleado_Cocinero FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni) ,
 		CONSTRAINT CK_AnniosServicio CHECK(AnniosServicio >= 0)
-
 	)
 	GO
 
@@ -50,7 +49,8 @@
 		FechaNacimiento date NOT NULL,
 		IdEmpleado varchar(12) NOT NULL,
 		CONSTRAINT PK_IdPinche PRIMARY KEY (IdPinche),
-		CONSTRAINT FK_IdEmpleado_Pinche FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni)
+		CONSTRAINT FK_IdEmpleado_Pinche FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni) ON DELETE CASCADE,
+		CONSTRAINT FK_IdCocinero_Pinche FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero) ON DELETE CASCADE
 	)
 	GO
 
