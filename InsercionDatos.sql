@@ -15,6 +15,10 @@ EXEC CrearEmpleado '201325522','Emilio','Elisondo', 'Carrillo',10324, '26652525'
 EXEC CrearEmpleado '1454755','Emilio','Elisondo', 'Carrillo',10324, '26652525', '66666666'
 --SELECT Dni, Nombre, Apellido1, Apellido2, NumSeguro, NumTelefono, NumCelular  FROM Empleados
 
+USE CIELOAZUL
+GO
+DELETE FROM Empleados WHERE Empleados.Dni = 504190041 
+
 --crear Cocineros
 EXEC CrearCocineros 5, '504190041'
 EXEC CrearCocineros 8,'505050505'
@@ -42,6 +46,8 @@ EXEC CrearPlato 'Helado de vainilla', 1400
 EXEC CrearPlato 'Pastel de chocolate', 2500
 --SELECT IdPlato,NombrePlato,Precio  FROM Platos
 
+DELETE FROM Platos WHERE Platos.IdPlato = 6 
+
 --Crear Entrantes
 EXEC CrearPlatoEntrante 1
 EXEC CrearPlatoEntrante 2
@@ -68,7 +74,7 @@ EXEC CrearPostre 10
 EXEC CrearAlmacen 5, 'Almacen Liberia', 'Ubicado en liberia centro'
 EXEC CrearAlmacen 10, 'Almacen Nicoya', 'Ubicado en Nicoya centro'
 --SELECT NumAlmacen, Nombre, Descripcion FROM Almacenes
-
+ DELETE FROM Almacenes WHERE Almacenes.NumAlmacen = 5
 --Crear Estante
 EXEC CrearEstante 'AA', 100.15, 5
 EXEC CrearEstante 'AB', 95.25,  5
@@ -96,12 +102,12 @@ EXEC CrearIngredientes 'Chile', 70, 8
 
 
 --Crear PlatoIngredientes
-EXEC CrearPlatoIngredientes 20, 1, 3 
-EXEC CrearPlatoIngredientes 2, 2, 3
+EXEC CrearPlatoIngredientes 20, 1, 1 
+EXEC CrearPlatoIngredientes 2, 2, 1
 EXEC CrearPlatoIngredientes 15, 3, 6
 EXEC CrearPlatoIngredientes 5,  4, 6
 EXEC CrearPlatoIngredientes 5,  4, 7
-EXEC CrearPlatoIngredientes 10, 5, 3
+EXEC CrearPlatoIngredientes 10, 5, 1
 --SELECT IdPlatoIngrediente, CantidadIngrediente, IdIngrediente, IdPlato FROM PlatoIngredientes
 
 --Crear Conoce Plato
