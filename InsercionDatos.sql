@@ -12,6 +12,7 @@ EXEC CrearEmpleado '201455445','Pedro','Guzman', 'Mendoza',78021, '26652525', '6
 EXEC CrearEmpleado '320145588','Ana','Mora', 'Juarez',03214, '26652525', '66666666'
 EXEC CrearEmpleado '652365236','Ruben','Jimenes', 'Carvajal',03114, '26652525', '66666666'
 EXEC CrearEmpleado '201325522','Emilio','Elisondo', 'Carrillo',10324, '26652525', '66666666'
+EXEC CrearEmpleado '1454755','Emilio','Elisondo', 'Carrillo',10324, '26652525', '66666666'
 --SELECT Dni, Nombre, Apellido1, Apellido2, NumSeguro, NumTelefono, NumCelular  FROM Empleados
 
 --crear Cocineros

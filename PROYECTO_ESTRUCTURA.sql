@@ -174,6 +174,16 @@
     )
 	GO
 
+	USE CIELOAZUL
+	GO 
+	CREATE TABLE Auditoria(
+		IdAuditoria int IDENTITY (1,1) NOT NULL,
+		Usuario varchar(20),
+		Hora datetime,
+		Descripcion varchar(50)
+		CONSTRAINT PK_IdAuditoria PRIMARY KEY (IdAuditoria)
+	)
+
 
 
 
