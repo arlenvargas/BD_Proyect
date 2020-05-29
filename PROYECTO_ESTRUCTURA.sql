@@ -32,11 +32,11 @@
 	USE CIELOAZUL
 	GO 
 	CREATE TABLE Cocineros( 
-	    IdCocinero int  IDENTITY (1,1)  NOT NULL  ,
+	    IdCocinero int IDENTITY (1,1)  NOT NULL,
 		AnniosServicio int NOT NULL,
 		IdEmpleado varchar(12) NOT NULL,
 		CONSTRAINT PK_IdCocinero PRIMARY KEY (IdCocinero),
-		CONSTRAINT FK_IdEmpleado_Cocinero FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni) ,
+		CONSTRAINT FK_IdEmpleado_Cocinero FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni) ON DELETE CASCADE,
 		CONSTRAINT CK_AnniosServicio CHECK(AnniosServicio >= 0)
 	)
 	GO
@@ -49,8 +49,8 @@
 		FechaNacimiento date NOT NULL,
 		IdEmpleado varchar(12) NOT NULL,
 		CONSTRAINT PK_IdPinche PRIMARY KEY (IdPinche),
-		CONSTRAINT FK_IdEmpleado_Pinche FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni) ON DELETE CASCADE,
-		CONSTRAINT FK_IdCocinero_Pinche FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero) ON DELETE CASCADE
+		CONSTRAINT FK_IdEmpleado_Pinche FOREIGN KEY (IdEmpleado) REFERENCES Empleados(Dni),
+		CONSTRAINT FK_IdCocinero_P FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero) ON DELETE CASCADE
 	)
 	GO
 
@@ -70,7 +70,7 @@
 		IdEntrante int  IDENTITY (1,1) NOT NULL,
 		IdPlato int NOT NULL,
      	CONSTRAINT PK_IdEntrante PRIMARY KEY (IdEntrante),
-		CONSTRAINT FK_IdPlato_Entrante FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato)
+		CONSTRAINT FK_IdPlato_Entrante FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE CASCADE,
 	)
 	GO
 
@@ -80,7 +80,7 @@
 		IdPrimerPlato int  IDENTITY (1,1) NOT NULL,
 		IdPlato int NOT NULL,
      	CONSTRAINT PK_IdPrimerPlato PRIMARY KEY (IdPrimerPlato),
-		CONSTRAINT FK_IdPlato_Primero FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato)
+		CONSTRAINT FK_IdPlato_Primero FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE CASCADE,
 	)
 	GO
 
@@ -90,7 +90,7 @@
 		IdSegundoPlato int  IDENTITY (1,1) NOT NULL,
 		IdPlato int NOT NULL,
      	CONSTRAINT PK_IdSegundoPlato PRIMARY KEY (IdSegundoPlato),
-		CONSTRAINT FK_IdPlato_Segundo FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato)
+		CONSTRAINT FK_IdPlato_Segundo FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE CASCADE,
 	)
 	GO
 
@@ -100,7 +100,7 @@
 		IdPostre int  IDENTITY (1,1) NOT NULL,
 		IdPlato int NOT NULL,
      	CONSTRAINT PK_IdPostre PRIMARY KEY (IdPostre),
-		CONSTRAINT FK_IdPlato_Postre FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato)
+		CONSTRAINT FK_IdPlato_Postre FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE CASCADE,
 	)
 	GO
 
@@ -122,7 +122,7 @@
 		TamCentimetros float NOT NULL,
 		IdAlmecen int NOT NULL,
 		CONSTRAINT PK_IdEstante PRIMARY KEY (IdEstante),
-		CONSTRAINT FK_Almacen_Estante FOREIGN KEY (IdAlmecen) REFERENCES Almacenes(NumAlmacen),
+		CONSTRAINT FK_Almacen_Estante FOREIGN KEY (IdAlmecen) REFERENCES Almacenes(NumAlmacen) ON DELETE CASCADE,
 	)
 	GO
 
@@ -134,7 +134,7 @@
 		CantidadIngrediente int NOT NULL,
 		IdEstante int NOT NULL,
 		CONSTRAINT PK_IdIngrediente PRIMARY KEY (IdIngrediente),
-		CONSTRAINT FK_IdEstante_Ingredientes FOREIGN KEY (IdEstante) REFERENCES Estantes(IdEstante)
+		CONSTRAINT FK_IdEstante_Ingredientes FOREIGN KEY (IdEstante) REFERENCES Estantes(IdEstante) ON DELETE CASCADE,
 	)
 	GO
 
@@ -146,8 +146,8 @@
 	   IdIngrediente int NOT NULL,
 	   IdPlato int NOT NULL,
 	   CONSTRAINT PK_Id_PlatoIngrediente PRIMARY KEY (IdPlatoIngrediente),
-	   CONSTRAINT FK_Ingrediente_PlatoIngrediente FOREIGN KEY (IdIngrediente) REFERENCES Ingredientes(IdIngrediente),
-	   CONSTRAINT FK_Plato_PlatoIngrediente FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato)
+	   CONSTRAINT FK_Ingrediente_PlatoIngrediente FOREIGN KEY (IdIngrediente) REFERENCES Ingredientes(IdIngrediente) ON DELETE CASCADE,
+	   CONSTRAINT FK_Plato_PlatoIngrediente FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE CASCADE,
 	)
 	GO
 
@@ -158,8 +158,8 @@
 		IdPlato int NOT NULL,
 		IdCocinero int NOT NULL
 		CONSTRAINT PK_IdConocePlato PRIMARY KEY (IdConocePlato),
-		CONSTRAINT FK_IdPlato FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato),
-		CONSTRAINT FK_IdCocinero FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero)
+		CONSTRAINT FK_IdPlato FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE CASCADE,
+		CONSTRAINT FK_IdCocinero FOREIGN KEY (IdCocinero) REFERENCES Cocineros(IdCocinero) ON DELETE CASCADE,
 	)
 
 	USE CIELOAZUL
@@ -169,8 +169,8 @@
         IdConocePlato int NOT NULL,
         IdPlato int NOT NULL,
         CONSTRAINT PK_IdPreparaPlato PRIMARY KEY (IdPreparaPlato),
-        CONSTRAINT FK_IdConocePlato FOREIGN KEY (IdConocePlato) REFERENCES ConocePlato(IdConocePlato),
-        CONSTRAINT FK_IdPreparaPlato_Plato FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato)
+        CONSTRAINT FK_IdConocePlato FOREIGN KEY (IdConocePlato) REFERENCES ConocePlato(IdConocePlato) ON DELETE CASCADE,
+        CONSTRAINT FK_IdPreparaPlato_Plato FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato),
     )
 	GO
 

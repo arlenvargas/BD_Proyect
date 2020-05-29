@@ -2,8 +2,8 @@ USE CIELOAZUL
 --insertar datos
 
 --crear Empleados
-EXEC CrearEmpleado '504190041', 'Manuel', 'Rodriguez', 'Baltodano', 4785, '26656565', 83537229
-EXEC CrearEmpleado '505050505', 'Luis', 'Rodriguez', 'Baltodano', 65978, '26656565', 83537229
+EXEC CrearEmpleado '15454879', 'Manuel', 'Rodriguez', 'Baltodano', 4785, '26656565', 83537229
+EXEC CrearEmpleado '504190041', 'Luis', 'Rodriguez', 'Baltodano', 65978, '26656565', 83537229
 EXEC CrearEmpleado '501457820','Tatiana','Morales', 'Mendez',3244, '26652525', '66666666'
 EXEC CrearEmpleado '78965877','Ricardo','Morataya', 'Sandoval',1247, '62548759', '7584596'
 EXEC CrearEmpleado '456987448','Arlen','Vargar', 'Galves',02145, '8585896', '87459625'
@@ -14,12 +14,17 @@ EXEC CrearEmpleado '652365236','Ruben','Jimenes', 'Carvajal',03114, '26652525', 
 EXEC CrearEmpleado '201325522','Emilio','Elisondo', 'Carrillo',10324, '26652525', '66666666'
 EXEC CrearEmpleado '1454755','Emilio','Elisondo', 'Carrillo',10324, '26652525', '66666666'
 --SELECT Dni, Nombre, Apellido1, Apellido2, NumSeguro, NumTelefono, NumCelular  FROM Empleados
+DELETE FROM Empleados WHERE Empleados.Dni = '504190041'
+USE CIELOAZUL
+GO
+DELETE FROM Empleados WHERE Empleados.Dni = 504190041 
 
 --crear Cocineros
 EXEC CrearCocineros 5, '504190041'
-EXEC CrearCocineros 8,'505050505'
+EXEC CrearCocineros 8,'15454879'
 EXEC CrearCocineros 23,'501457820'
 --SELECT IdCocinero, AnniosServicio, IdEmpleado FROM Cocineros
+DELETE FROM Cocineros WHERE Cocineros.IdCocinero = 1
 
 --crear Pinches
 EXEC CrearPinches  1, '2020/05/28', '78965877'
@@ -28,6 +33,7 @@ EXEC CrearPinches  2, '1987/07/05', '320145588'
 EXEC CrearPinches  2, '1997/04/25', '102365889'
 EXEC CrearPinches  3, '1997/11/05', '201455445'
 --SELECT IdPinche,IdCocinero,FechaNacimiento,IdEmpleado  FROM Pinches
+
 
 --crear Platos
 EXEC CrearPlato 'Ensalada', 750
@@ -41,6 +47,8 @@ EXEC CrearPlato 'Helado de Fresa', 1400
 EXEC CrearPlato 'Helado de vainilla', 1400
 EXEC CrearPlato 'Pastel de chocolate', 2500
 --SELECT IdPlato,NombrePlato,Precio  FROM Platos
+
+DELETE FROM Platos WHERE Platos.IdPlato = 6 
 
 --Crear Entrantes
 EXEC CrearPlatoEntrante 1
@@ -68,7 +76,7 @@ EXEC CrearPostre 10
 EXEC CrearAlmacen 5, 'Almacen Liberia', 'Ubicado en liberia centro'
 EXEC CrearAlmacen 10, 'Almacen Nicoya', 'Ubicado en Nicoya centro'
 --SELECT NumAlmacen, Nombre, Descripcion FROM Almacenes
-
+ DELETE FROM Almacenes WHERE Almacenes.NumAlmacen = 5
 --Crear Estante
 EXEC CrearEstante 'AA', 100.15, 5
 EXEC CrearEstante 'AB', 95.25,  5
@@ -96,12 +104,12 @@ EXEC CrearIngredientes 'Chile', 70, 8
 
 
 --Crear PlatoIngredientes
-EXEC CrearPlatoIngredientes 20, 1, 3 
-EXEC CrearPlatoIngredientes 2, 2, 3
+EXEC CrearPlatoIngredientes 20, 1, 1 
+EXEC CrearPlatoIngredientes 2, 2, 1
 EXEC CrearPlatoIngredientes 15, 3, 6
 EXEC CrearPlatoIngredientes 5,  4, 6
 EXEC CrearPlatoIngredientes 5,  4, 7
-EXEC CrearPlatoIngredientes 10, 5, 3
+EXEC CrearPlatoIngredientes 10, 5, 1
 --SELECT IdPlatoIngrediente, CantidadIngrediente, IdIngrediente, IdPlato FROM PlatoIngredientes
 
 --Crear Conoce Plato
