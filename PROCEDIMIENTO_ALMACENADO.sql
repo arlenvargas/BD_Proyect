@@ -131,8 +131,47 @@ GO
 
 USE CIELOAZUL
 GO
+
+CREATE PROC SP_valida_plato_tiene_categoria (@IdPlato varchar(5))
+AS
+    IF (@IdPlato = '')
+		BEGIN
+			PRINT 'EL ID DEL PLATO NO DEBE SER NULO'
+		    RETURN 1;
+		END
+    ELSE IF EXISTS(SELECT IdPlato FROM Entrantes WHERE IdPlato = @IdPlato)
+		BEGIN
+			PRINT 'El plato ya es un entrante'
+		    RETURN 1
+		END
+    ELSE IF EXISTS(SELECT IdPlato FROM PrimerPlato WHERE IdPlato = @IdPlato)
+		BEGIN
+			PRINT 'El plato ya es un entrante'
+		    RETURN 1
+		END
+    ELSE IF EXISTS(SELECT IdPlato FROM SegundoPlato WHERE IdPlato = @IdPlato)
+		BEGIN
+			PRINT 'El plato ya es un entrante'
+		    RETURN 1
+		END
+    ELSE IF EXISTS(SELECT IdPlato FROM Postres WHERE IdPlato = @IdPlato)
+		BEGIN
+			PRINT 'El plato ya es un entrante'
+		    RETURN 1
+		END
+    ELSE
+        RETURN 0 -- No tiene categoria
+GO
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------------*/
+
+USE CIELOAZUL
+GO
 CREATE PROC CrearPlatoEntrante (@IdPlato varchar(5))
 AS
+    DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
 		BEGIN
 			PRINT 'EL ID DEL PLATO NO DEBE SER NULO'
@@ -147,9 +186,13 @@ AS
 		END
 	ELSE
 		BEGIN
-			INSERT INTO Entrantes(IdPlato)
-			VALUES (CONVERT(int, @IdPlato))
-			PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+		    EXEC @hasCategory = SP_valida_plato_tiene_categoria @IdPlato;
+		    IF (@hasCategory = 0)
+		        BEGIN
+		            INSERT INTO Entrantes(IdPlato)
+			        VALUES (CONVERT(int, @IdPlato))
+			        PRINT 'EL REGISTRO SE HA INGRESADO CORRECTAMENTE'
+		        END
 		END
 GO
 
