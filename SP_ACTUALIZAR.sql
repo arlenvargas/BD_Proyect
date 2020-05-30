@@ -102,7 +102,7 @@ GO
 -----------------------------------------------ActualizarPinches-------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPinches
+CREATE PROCEDURE ActualizarPinche
        @IdPinche varchar(5),
        @IdCocinero varchar(5),
        @FechaNacimiento varchar(10),
@@ -461,7 +461,7 @@ GO
 --------------------------------------------------ActualizarIngredientes--------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarIngredientes
+CREATE PROCEDURE ActualizarIngrediente
 			@IdIngrediente varchar(8),
 			@NombreIngrediente varchar(30),
 			@CantidadIngrediente varchar(8),
@@ -510,7 +510,7 @@ GO
 ---------------------------------------------ActualizarPlatoIngredientes--------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPlatoIngredientes
+CREATE PROCEDURE ActualizarPlatoIngrediente
 			@IdPlatoIngrediente varchar(8),
 			@CantidadIngrediente varchar(8),
 			@IdIngrediente varchar(8),
@@ -536,7 +536,7 @@ AS
 				END
 					ELSE IF((ISNUMERIC(@IdIngrediente) = 0) OR (CONVERT(int, @IdIngrediente ) < 0))
 				BEGIN
-					PRINT 'EL ID INGREDIENTES TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
+					PRINT 'EL ID INGREDIENTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 				END
 					ELSE IF((ISNUMERIC(@IdPlato) = 0) OR (CONVERT(int, @IdPlato ) < 0))
 				BEGIN

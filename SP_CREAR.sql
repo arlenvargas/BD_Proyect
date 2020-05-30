@@ -1,6 +1,7 @@
 USE CIELOAZUL
 GO
-CREATE PROC CrearEmpleado (@Dni varchar(12),
+CREATE PROC CrearEmpleado (
+	@Dni varchar(12),
     @Nombre varchar(30),
     @Apellido1 varchar(40),
     @Apellido2 varchar(40),
