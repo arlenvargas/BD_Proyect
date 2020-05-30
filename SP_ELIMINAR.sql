@@ -12,7 +12,6 @@ AS
 		BEGIN
 			IF EXISTS (SELECT IdCocinero FROM Cocineros WHERE Cocineros.IdEmpleado = @Dni )
 				BEGIN
-					PRINT 'Desde if exist'
 					DECLARE @IdCocinero varchar(12)
 					SELECT @IdCocinero = Cocineros.IdCocinero FROM Cocineros WHERE Cocineros.IdEmpleado = @Dni
 					DELETE FROM Pinches WHERE Pinches.IdCocinero = @IdCocinero
