@@ -455,11 +455,65 @@ AS
 		END
 GO
 --------------------------------------------------ActualizarIngredientes--------------------------------------------------
+USE CIELOAZUL
+GO
 
+CREATE PROCEDURE ActualizarIngredientes
+			@IdIngrediente varchar(8),
+			@NombreIngrediente varchar(30),
+			@CantidadIngrediente varchar(8),
+			@IdEstante varchar(5)
+	  
+AS
+	IF (@IdIngrediente = '')
+		BEGIN
+			PRINT 'NO SE PERMITEN CAMPOS VACIOS'
+		END
+	ELSE IF((ISNUMERIC(@IdIngrediente) = 0) OR (CONVERT(int, @IdIngrediente ) < 0))
+		BEGIN
+			PRINT 'EL ID DE INGREDIENTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
+		END
 
+	ELSE IF (EXISTS(SELECT IdIngrediente FROM Ingredientes WHERE IdIngrediente=@IdIngrediente))
+		BEGIN
+			IF (@NombreIngrediente = '') OR (@CantidadIngrediente ='') OR (@IdEstante ='')
+				BEGIN
+					PRINT 'NO SE PERMITE CAMPOS VACIOS '
+				END
+			ELSE IF((ISNUMERIC(@CantidadIngrediente) = 0) OR (CONVERT(int, @CantidadIngrediente ) < 0))
+				BEGIN
+					PRINT 'LA CANTIDAD DE INGREDIENTES TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
+				END
+			
+					ELSE IF((ISNUMERIC(@IdEstante) = 0) OR (CONVERT(int, @IdEstante ) < 0))
+				BEGIN
+					PRINT 'EL ID ESTANTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
+				END
+			ELSE IF (NOT EXISTS(SELECT IdIngrediente FROM Ingredientes WHERE IdIngrediente=@IdIngrediente))
+				BEGIN
+						PRINT 'EL INGREDIENTE NO EXISTE'
+				END
+			ELSE IF (EXISTS(SELECT IdEstante FROM Estantes WHERE IdEstante=@IdEstante ))
+				BEGIN
+						PRINT 'ESTE INGREDIENTE YA EXISTE EN EL ALMACEN'
+				END
+	
+			ELSE
+				BEGIN
+					UPDATE Ingredientes
+						Set	NombreIngrediente = @NombreIngrediente,
+							CantidadIngrediente =  CONVERT (int,@CantidadIngrediente),
+							IdEstante = CONVERT(int, @IdEstante)
 
-
-
+							
+					  WHERE IdIngrediente = CONVERT(int, @IdIngrediente)
+				END
+		END
+	ELSE
+        BEGIN
+			PRINT 'EL ID DE INGREDIENTE INGREDIENTE NO EXISTE'
+		END
+GO
 
 
 ---------------------------------------------ActualizarPlatoIngredientes--------------------------------------------------------------
