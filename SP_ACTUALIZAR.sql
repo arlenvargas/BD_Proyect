@@ -1,7 +1,7 @@
 ------------------------------------------ActualizarEmpleado----------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarEmpleado
+CREATE PROCEDURE SP_ActualizarEmpleado
        @Dni varchar(12),
        @Nombre varchar(30),  
 	   @Apellido1 varchar(40),  
@@ -49,7 +49,7 @@ GO
 ------------------------------------------ActualizarCocineros----------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarCocinero
+CREATE PROCEDURE SP_ActualizarCocinero
        @IdCocinero varchar(5),
        @AnniosServicio varchar(2),
 	   @IdEmpleado varchar(12) 
@@ -102,7 +102,7 @@ GO
 -----------------------------------------------ActualizarPinches-------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPinche
+CREATE PROCEDURE SP_ActualizarPinche
        @IdPinche varchar(5),
        @IdCocinero varchar(5),
        @FechaNacimiento varchar(10),
@@ -160,7 +160,7 @@ GO
 ---------------------------------------------ActualizarPlato------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPlato
+CREATE PROCEDURE SP_ActualizarPlato
        @IdPlato VARCHAR(10) ,
        @NombrePlato varchar(50), 
 	   @Precio varchar(11)  
@@ -200,7 +200,7 @@ GO
 -----------------------------------------------ActualizarPlatoEntrante---------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPlatoEntrante
+CREATE PROCEDURE SP_ActualizarPlatoEntrante
        @IdEntrante varchar(5),
        @IdPlato varchar(5)	 
 AS
@@ -243,7 +243,7 @@ GO
 -----------------------------------------PrimerPlato--------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPrimerPlato
+CREATE PROCEDURE SP_ActualizarPrimerPlato
        @IdPrimerPlato varchar(5),
        @IdPlato varchar(5)	 
 AS
@@ -286,7 +286,7 @@ GO
 --------------------------------------------ActualizarSegundoPlato---------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarSegundoPlato
+CREATE PROCEDURE SP_ActualizarSegundoPlato
        @IdSegundoPlato varchar(5),
        @IdPlato varchar(5)	 
 AS
@@ -329,7 +329,7 @@ GO
 --------------------------------------ActualizarPostre--------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPostre
+CREATE PROCEDURE SP_ActualizarPostre
        @IdPostre varchar(5),
        @IdPlato varchar(5)	 
 AS
@@ -373,7 +373,7 @@ GO
 USE CIELOAZUL
 GO
 
-CREATE PROCEDURE ActualizarAlmacen
+CREATE PROCEDURE SP_ActualizarAlmacen
       @NumAlmacen varchar(5),
 	  @Nombre varchar(40),
 	  @Descripcion varchar(100)
@@ -411,7 +411,7 @@ GO
 ----------------------------------------------------------------ActualizarEstante---------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarEstante
+CREATE PROCEDURE SP_ActualizarEstante
         @IdEstante varchar(5),
 		@NombreEstante varchar(2),
 		@TamCentimetros varchar(15),
@@ -461,7 +461,7 @@ GO
 --------------------------------------------------ActualizarIngredientes--------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarIngrediente
+CREATE PROCEDURE SP_ActualizarIngrediente
 			@IdIngrediente varchar(8),
 			@NombreIngrediente varchar(30),
 			@CantidadIngrediente varchar(8),
@@ -510,7 +510,7 @@ GO
 ---------------------------------------------ActualizarPlatoIngredientes--------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarPlatoIngrediente
+CREATE PROCEDURE SP_ActualizarPlatoIngrediente
 			@IdPlatoIngrediente varchar(8),
 			@CantidadIngrediente varchar(8),
 			@IdIngrediente varchar(8),
@@ -567,7 +567,7 @@ GO
 --------------------------------------ActualizarConocePlato------------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROCEDURE ActualizarConocePlato
+CREATE PROCEDURE SP_ActualizarConocePlato
 			@IdConocePlato varchar(8),
 			@IdPlato varchar(8),
 			@IdCocinero varchar(8)  

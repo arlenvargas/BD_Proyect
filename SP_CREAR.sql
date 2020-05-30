@@ -1,13 +1,13 @@
 USE CIELOAZUL
 GO
-CREATE PROC CrearEmpleado (
+CREATE PROC SP_CrearEmpleado 
 	@Dni varchar(12),
     @Nombre varchar(30),
     @Apellido1 varchar(40),
     @Apellido2 varchar(40),
     @NumSeguro varchar(20),
     @NumTelefono varchar(12),
-    @NumCelular varchar(12))
+    @NumCelular varchar(12)
 AS
 	IF ((@Dni = '') OR (@Nombre = '') OR ( @Apellido1 = '') OR (@Apellido2 = '') OR (@NumTelefono = '') OR (@NumCelular = '') OR (@NumSeguro = ''))
 		BEGIN
@@ -37,7 +37,9 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearCocineros (@AnniosServicio varchar(2), @IdEmpleado varchar(12))
+CREATE PROC SP_CrearCocinero 
+	@AnniosServicio varchar(2), 
+	@IdEmpleado varchar(12)
 AS
 	IF((ISNUMERIC(@AnniosServicio) = 0) OR (CONVERT(int, @AnniosServicio) < 0))
 		BEGIN
@@ -67,7 +69,10 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearPinches (@IdCocinero varchar(5), @FechaNacimiento varchar(10), @IdEmpleado varchar(12))
+CREATE PROC SP_CrearPinche
+	@IdCocinero varchar(5), 
+	@FechaNacimiento varchar(10), 
+	@IdEmpleado varchar(12)
 AS
 	IF (@IdCocinero='' OR @FechaNacimiento = '' OR @IdEmpleado='')
 		BEGIN
@@ -109,7 +114,9 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearPlato (@NombrePlato varchar(50), @Precio varchar(5))
+CREATE PROC SP_CrearPlato 
+	@NombrePlato varchar(50), 
+	@Precio varchar(5)
 AS
 	IF(@NombrePlato = '' OR @Precio = '')
 		BEGIN
@@ -133,7 +140,8 @@ GO
 USE CIELOAZUL
 GO
 
-CREATE PROC SP_valida_plato_tiene_categoria (@IdPlato varchar(5))
+CREATE PROC SP_valida_plato_tiene_categoria 
+	@IdPlato varchar(5)
 AS
     IF (@IdPlato = '')
 		BEGIN
@@ -170,7 +178,8 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearPlatoEntrante (@IdPlato varchar(5))
+CREATE PROC SP_CrearPlatoEntrante 
+	@IdPlato varchar(5)
 AS
     DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
@@ -201,7 +210,8 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearPrimerPlato (@IdPlato varchar(5))
+CREATE PROC SP_CrearPrimerPlato 
+	@IdPlato varchar(5)
 AS
 	DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
@@ -232,7 +242,8 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearSegundoPlato (@IdPlato varchar(5))
+CREATE PROC SP_CrearSegundoPlato 
+	@IdPlato varchar(5)
 AS
 	DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
@@ -263,7 +274,8 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearPostre (@IdPlato varchar(5))
+CREATE PROC SP_CrearPostre 
+	@IdPlato varchar(5)
 AS
 	DECLARE @hasCategory BIT = 0
 	IF (@IdPlato = '')
@@ -294,7 +306,10 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearAlmacen (@NumAlmacen varchar(5), @Nombre varchar(40), @Descripcion varchar(100))
+CREATE PROC SP_CrearAlmacen 
+	@NumAlmacen varchar(5), 
+	@Nombre varchar(40), 
+	@Descripcion varchar(100)
 AS
 	IF ((@NumAlmacen = '') OR (@Nombre = ''))
 		BEGIN
@@ -320,7 +335,10 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearEstante (@NombreEstante varchar(2), @TamCentimetros varchar(15), @IdAlmecen varchar(15))
+CREATE PROC SP_CrearEstante 
+	@NombreEstante varchar(2), 
+	@TamCentimetros varchar(15), 
+	@IdAlmecen varchar(15)
 AS
 	IF ((@NombreEstante = '') OR (@TamCentimetros = '') OR (@IdAlmecen = ''))
 		BEGIN
@@ -354,7 +372,10 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearIngredientes (@NombreIngrediente varchar(30), @CantidadIngrediente varchar(10), @IdEstante varchar(10))
+CREATE PROC SP_CrearIngrediente 
+	@NombreIngrediente varchar(30), 
+	@CantidadIngrediente varchar(10), 
+	@IdEstante varchar(10)
 AS
 	IF (@NombreIngrediente = '' OR @CantidadIngrediente = '' OR @IdEstante = '')
 		BEGIN
@@ -380,7 +401,10 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearPlatoIngredientes (@CantidadIngrediente varchar(8), @IdIngrediente varchar(8), @IdPlato varchar(5))
+CREATE PROC SP_CrearPlatoIngredientes 
+	@CantidadIngrediente varchar(8), 
+	@IdIngrediente varchar(8), 
+	@IdPlato varchar(5)
 AS
 	IF ((@CantidadIngrediente = '') OR (@IdIngrediente='') OR (@IdPlato = ''))
 		BEGIN
@@ -414,7 +438,9 @@ GO
 
 USE CIELOAZUL
 GO
-CREATE PROC CrearConocePlato (@IdPlato varchar(5), @IdCocinero varchar(5))
+CREATE PROC SP_CrearConocePlato 
+	@IdPlato varchar(5), 
+	@IdCocinero varchar(5)
 AS
 	IF ((@IdPlato = '') OR (@IdCocinero=''))
 		BEGIN
@@ -447,7 +473,8 @@ GO
 -----------------------------------Restar Ingredientes ----------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROC SP_ActualizaIngredientes (@IdPlato varchar(5))
+CREATE PROC SP_ActualizaIngredientes 
+	@IdPlato varchar(5)
 AS
 	IF (@IdPlato = '')
 		BEGIN
@@ -499,7 +526,8 @@ GO
 ----------------------------------------------------Validar existencia ingredientes------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROC SP_VerificaIngredientes (@IdPlato varchar(5))
+CREATE PROC SP_VerificaIngrediente 
+	@IdPlato varchar(5)
 AS
 	IF (@IdPlato = '')
 		BEGIN
@@ -546,14 +574,13 @@ AS
 		END
 GO
 
-
-USE CIELOAZUL
-GO
 ---------------------------------------------------Crear Preparar plato ----------------------------------------------------
 USE CIELOAZUL
 GO
 
-CREATE PROC CrearPrepararPlato (@IdConocePlato varchar(5), @IdPlato varchar(5))
+CREATE PROC SP_CrearPrepararPlato 
+	@IdConocePlato varchar(5), 
+	@IdPlato varchar(5)
 AS
 	IF ((@IdConocePlato = '') OR (@IdPlato = ''))
 		BEGIN
