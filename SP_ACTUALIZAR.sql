@@ -1,7 +1,6 @@
 ------------------------------------------ActualizarEmpleado----------------------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarEmpleado
        @Dni varchar(12),
        @Nombre varchar(30),  
@@ -462,13 +461,11 @@ GO
 --------------------------------------------------ActualizarIngredientes--------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarIngredientes
 			@IdIngrediente varchar(8),
 			@NombreIngrediente varchar(30),
 			@CantidadIngrediente varchar(8),
 			@IdEstante varchar(5)
-	  
 AS
 	IF (@IdIngrediente = '')
 		BEGIN
@@ -478,7 +475,6 @@ AS
 		BEGIN
 			PRINT 'EL ID DE INGREDIENTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 		END
-
 	ELSE IF (EXISTS(SELECT IdIngrediente FROM Ingredientes WHERE IdIngrediente=@IdIngrediente))
 		BEGIN
 			IF (@NombreIngrediente = '') OR (@CantidadIngrediente ='') OR (@IdEstante ='')
@@ -489,38 +485,28 @@ AS
 				BEGIN
 					PRINT 'LA CANTIDAD DE INGREDIENTES TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 				END
-			
-					ELSE IF((ISNUMERIC(@IdEstante) = 0) OR (CONVERT(int, @IdEstante ) < 0))
+			ELSE IF((ISNUMERIC(@IdEstante) = 0) OR (CONVERT(int, @IdEstante ) < 0))
 				BEGIN
 					PRINT 'EL ID ESTANTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 				END
-			ELSE IF (NOT EXISTS(SELECT IdIngrediente FROM Ingredientes WHERE IdIngrediente=@IdIngrediente))
+			ELSE IF (NOT EXISTS(SELECT IdEstante FROM Estantes WHERE IdEstante=@IdEstante))
 				BEGIN
-						PRINT 'EL INGREDIENTE NO EXISTE'
+						PRINT 'EL ESTANTE NO EXISTE'
 				END
-			ELSE IF (EXISTS(SELECT IdEstante FROM Estantes WHERE IdEstante=@IdEstante ))
-				BEGIN
-						PRINT 'ESTE INGREDIENTE YA EXISTE EN EL ALMACEN'
-				END
-	
 			ELSE
 				BEGIN
 					UPDATE Ingredientes
 						Set	NombreIngrediente = @NombreIngrediente,
 							CantidadIngrediente =  CONVERT (int,@CantidadIngrediente),
-							IdEstante = CONVERT(int, @IdEstante)
-
-							
-					  WHERE IdIngrediente = CONVERT(int, @IdIngrediente)
+							IdEstante = CONVERT(int, @IdEstante)	
+						WHERE IdIngrediente = CONVERT(int, @IdIngrediente)
 				END
 		END
 	ELSE
         BEGIN
-			PRINT 'EL ID DE INGREDIENTE INGREDIENTE NO EXISTE'
+			PRINT 'EL ID DE INGREDIENTE NO EXISTE'
 		END
 GO
-
-
 ---------------------------------------------ActualizarPlatoIngredientes--------------------------------------------------------------
 USE CIELOAZUL
 GO

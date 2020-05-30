@@ -1,8 +1,4 @@
--------------------------------------------------Eliminar Empleados------------------------------------------------------------------
-
-
-
-
+-------------------------------------------------Eliminar Cocinero------------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC EliminarCocinero (@IdCocinero INT)
@@ -18,8 +14,6 @@ AS
 			DELETE FROM Cocineros WHERE Cocineros.IdCocinero = @IdCocinero
 			PRINT 'SE HA ELIMINADO EN COCINERO'
 	END
-
-
 EXEC EliminarCocinero '1'
 
 SELECT IdCocinero, AnniosServicio, IdEmpleado FROM Cocineros
@@ -47,6 +41,4 @@ SELECT IdCocinero, AnniosServicio, IdEmpleado FROM Cocineros
 			DELETE FROM Empleados WHERE Empleados.Dni = @Dni
 			PRINT 'SE HA ELIMINADO EL EMPLEADO'
 	END
-
-
 	EXEC EliminarEmpleado '505050505'
