@@ -1,25 +1,3 @@
--------------------------------------------------Eliminar Cocinero------------------------------------------------------------------
-USE CIELOAZUL
-GO
-CREATE PROC SP_EliminarCocinero (@IdCocinero INT)
-AS
-	IF (@IdCocinero = '') 
-		BEGIN
-			PRINT 'EL ID DE COCINERO NO PUEDE SER VACIO'
-		END
-	ELSE IF EXISTS (SELECT IdCocinero FROM Cocineros WHERE Cocineros.IdCocinero = @IdCocinero )
-		BEGIN
-		    DELETE FROM Pinches WHERE Pinches.IdCocinero = @IdCocinero
-			PRINT 'SE HA ELIMINADO EL PINCHE'
-			DELETE FROM Cocineros WHERE Cocineros.IdCocinero = @IdCocinero
-			PRINT 'SE HA ELIMINADO EN COCINERO'
-		END
-	ELSE
-		BEGIN
-			PRINT 'EL COCINERO NO EXISTE'
-		END
-GO
-
 --------------------------------------------------Eliminar Empleado--------------------------------------------------
 GO
 USE CIELOAZUL
@@ -45,6 +23,28 @@ AS
 	ELSE
 		BEGIN
 			PRINT 'EL DNI NO EXISTE'
+		END
+GO
+
+-------------------------------------------------Eliminar Cocinero------------------------------------------------------------------
+USE CIELOAZUL
+GO
+CREATE PROC SP_EliminarCocinero (@IdCocinero INT)
+AS
+	IF (@IdCocinero = '') 
+		BEGIN
+			PRINT 'EL ID DE COCINERO NO PUEDE SER VACIO'
+		END
+	ELSE IF EXISTS (SELECT IdCocinero FROM Cocineros WHERE Cocineros.IdCocinero = @IdCocinero )
+		BEGIN
+		    DELETE FROM Pinches WHERE Pinches.IdCocinero = @IdCocinero
+			PRINT 'SE HA ELIMINADO EL PINCHE'
+			DELETE FROM Cocineros WHERE Cocineros.IdCocinero = @IdCocinero
+			PRINT 'SE HA ELIMINADO EN COCINERO'
+		END
+	ELSE
+		BEGIN
+			PRINT 'EL COCINERO NO EXISTE'
 		END
 GO
 
