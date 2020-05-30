@@ -1,7 +1,7 @@
 -------------------------------------------------Eliminar Cocinero------------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROC EliminarCocinero (@IdCocinero INT)
+CREATE PROC SP_EliminarCocinero (@IdCocinero INT)
 AS
 	IF (@IdCocinero = '') 
 		BEGIN
@@ -18,15 +18,13 @@ AS
 		BEGIN
 			PRINT 'EL COCINERO NO EXISTE'
 		END
---EXEC EliminarCocinero '1'
+GO
 
---SELECT IdCocinero, AnniosServicio, IdEmpleado FROM Cocineros
-
----------------------------------------Eliminar Empleado ----------------------------------
+--------------------------------------------------Eliminar Empleado--------------------------------------------------
 GO
 USE CIELOAZUL
 GO
-CREATE PROC EliminarEmpleado (@Dni VARCHAR(12))
+CREATE PROC SP_EliminarEmpleado (@Dni VARCHAR(12))
 AS
 	IF (@Dni = '') 
 		BEGIN
@@ -48,11 +46,9 @@ AS
 		BEGIN
 			PRINT 'EL DNI NO EXISTE'
 		END
-	--EXEC EliminarEmpleado '505050505'
-
-
-
 GO
+
+--------------------------------------------------Eliminar Pinche------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarPinche (@IdPinche VARCHAR(12))
@@ -74,12 +70,9 @@ AS
 		BEGIN
 			PRINT 'EL ID PINCHE NO EXISTE'
 		END
-
-EXEC SP_EliminarPinche '1'
-
-
-
 GO
+
+--------------------------------------------------Eliminar Plato------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarPlato (@IdPlato VARCHAR(12))
@@ -101,15 +94,9 @@ AS
 		BEGIN
 			PRINT 'EL ID PLATO NO EXISTE'
 		END
-
-	EXEC SP_EliminarPlato '1'
-
-
-
-
-
-
 GO
+
+--------------------------------------------------Eliminar Entrante------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarPlatoEntrante (@IdEntrante VARCHAR(12))
@@ -131,13 +118,9 @@ AS
 		BEGIN
 			PRINT 'EL ID PLATO ENTRANTE NO EXISTE'
 		END
-
-	EXEC SP_EliminarPlatoEntrante '2'
-
-
-
-
 GO
+
+--------------------------------------------------Eliminar Primer Plato------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarPrimerPlato (@IdPrimerPlato VARCHAR(12))
@@ -161,13 +144,9 @@ AS
 		END
 
 	EXEC SP_EliminarPrimerPlato '1'
-
-
-
-
-
-
 GO
+
+--------------------------------------------------Eliminar Segundo Plato------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarSegundoPlato (@IdSegundoPlato VARCHAR(12))
@@ -189,15 +168,9 @@ AS
 		BEGIN
 			PRINT 'EL ID DE SEGUNDO PLATO NO EXISTE'
 		END
-
-
-	EXEC SP_EliminarSegundoPlato '1'
-
-
-
-
-
 GO
+
+--------------------------------------------------Eliminar Postre------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarPostre (@IdPostre VARCHAR(12))
@@ -219,17 +192,9 @@ AS
 		BEGIN
 			PRINT 'EL ID DE POSTRE NO EXISTE'
 		END
-
-
-	EXEC SP_EliminarSegundoPlato '1'
-
-
-
-
-
-
-
 GO
+
+--------------------------------------------------Eliminar Almacen------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarAlmacen (@NumAlmacen VARCHAR(12))
@@ -251,13 +216,9 @@ AS
 		BEGIN
 			PRINT 'EL ID DE ALMACEN NO EXISTE'
 		END
-
-
-	EXEC SP_EliminarAlmacen'1'
-
-
-
 GO
+
+--------------------------------------------------Eliminar Estante------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarEstante (@IdEstante VARCHAR(12))
@@ -279,17 +240,12 @@ AS
 		BEGIN
 			PRINT 'EL ID DE ALMACEN NO EXISTE'
 		END
+GO
 
-
-	EXEC SP_EliminarAlmacen'1'
-
-
-
-
-	GO
+--------------------------------------------------Eliminar Ingrediente------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROC SP_EliminarIngredientes (@IdIngrediente VARCHAR(12))
+CREATE PROC SP_EliminarIngrediente (@IdIngrediente VARCHAR(12))
 AS
 	IF (@IdIngrediente = '') 
 		BEGIN
@@ -308,15 +264,9 @@ AS
 		BEGIN
 			PRINT 'EL ID DE INGREDIENTE NO EXISTE'
 		END
+GO
 
-
-	EXEC SP_EliminarAlmacen'1'
-
-
-
-
-	
-	GO
+--------------------------------------------------Eliminar Plato Ingrediente------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarPlatoIngrediente (@IdPlatoIngrediente VARCHAR(12))
@@ -338,12 +288,9 @@ AS
 		BEGIN
 			PRINT 'EL ID DE PLATO INGREDIENTE NO EXISTE'
 		END
-
-
-
-
-
 GO
+
+--------------------------------------------------Eliminar Conoce Plato------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarConocePlato (@IdConocePlato VARCHAR(12))
@@ -365,12 +312,9 @@ AS
 		BEGIN
 			PRINT 'EL ID DE CONOCE PLATO NO EXISTE'
 	END
+GO
 
-
-
-
-
-	GO
+--------------------------------------------------Eliminar Preparar Plato------------------------------------------------------------
 USE CIELOAZUL
 GO
 CREATE PROC SP_EliminarPrepararPlato (@IdPreparaPlato VARCHAR(12))
@@ -392,6 +336,7 @@ AS
 		BEGIN
 			PRINT 'EL ID DE CONOCE PLATO NO EXISTE'
 	END
+GO
 
 
 
