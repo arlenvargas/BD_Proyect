@@ -14,3 +14,4 @@ SELECT * FROM Auditoria
 SELECT login_name 
 FROM sys.dm_exec_sessions   
 WHERE session_id = @@SPID
+ALTER LOGIN MANAGER ENABLE;
