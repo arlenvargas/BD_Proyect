@@ -168,6 +168,7 @@
         IdPreparaPlato int IDENTITY (1,1) NOT NULL,
         IdConocePlato int NOT NULL,
         IdPlato int NOT NULL,
+		FechaCreacion datetime DEFAULT(GETDATE()),
         CONSTRAINT PK_IdPreparaPlato PRIMARY KEY (IdPreparaPlato),
         CONSTRAINT FK_IdConocePlato FOREIGN KEY (IdConocePlato) REFERENCES ConocePlato(IdConocePlato)  ON DELETE CASCADE,
         CONSTRAINT FK_IdPreparaPlato_Plato FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE NO ACTION,
