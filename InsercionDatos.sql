@@ -13,16 +13,16 @@ EXEC CrearEmpleado '320145588','Ana','Mora', 'Juarez',03214, '26652525', '666666
 EXEC CrearEmpleado '652365236','Ruben','Jimenes', 'Carvajal',03114, '26652525', '66666666'
 EXEC CrearEmpleado '201325522','Emilio','Elisondo', 'Carrillo',10324, '26652525', '66666666'
 EXEC CrearEmpleado '1454755','Emilio','Elisondo', 'Carrillo',10324, '26652525', '66666666'
+
 --SELECT Dni, Nombre, Apellido1, Apellido2, NumSeguro, NumTelefono, NumCelular  FROM Empleados
-DELETE FROM Empleados WHERE Empleados.Dni = '504190041'
 USE CIELOAZUL
 GO
 --crear Cocineros
 EXEC CrearCocineros 5, '504190041'
 EXEC CrearCocineros 8,'15454879'
 EXEC CrearCocineros 23,'501457820'
+
 --SELECT IdCocinero, AnniosServicio, IdEmpleado FROM Cocineros
-DELETE FROM Cocineros WHERE Cocineros.IdCocinero = 1
 
 --crear Pinches
 EXEC CrearPinches  1, '2020/05/28', '78965877'
@@ -30,6 +30,8 @@ EXEC CrearPinches  1, '1990/11/10', '456987448'
 EXEC CrearPinches  2, '1987/07/05', '320145588'
 EXEC CrearPinches  2, '1997/04/25', '102365889'
 EXEC CrearPinches  3, '1997/11/05', '201455445'
+
+EXEC ActualizarPinches 30, 10, '2000/12/25', '501457820'
 --SELECT IdPinche,IdCocinero,FechaNacimiento,IdEmpleado  FROM Pinches
 
 

@@ -38,7 +38,8 @@ AS
 							NumSeguro = CONVERT(int, @NumSeguro),
 							NumTelefono = @NumTelefono,
 							NumCelular = @NumCelular
-					  WHERE Dni = @Dni
+						WHERE Dni = @Dni
+						PRINT 'SE HA ACTUALIZADO CORRECTAMENTE'
 				END
 		END
 	ELSE
@@ -49,50 +50,49 @@ GO
 ------------------------------------------ActualizarCocineros----------------------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarCocinero
        @IdCocinero varchar(5),
        @AnniosServicio varchar(2),
-	   @IdEmpleado varchar(12)
-	  
+	   @IdEmpleado varchar(12) 
 AS
 	IF (@IdCocinero = '')
 		BEGIN
 			PRINT 'NO SE PERMITEN CAMPOS VACIOS'
 		END
 	ELSE IF(ISNUMERIC(@IdCocinero) = 0)
-	     BEGIN
-		      PRINT  'NUMERO DE ID DEBE SER DATOS NUMERICOS'
+		BEGIN
+		     PRINT  'NUMERO DE ID DEBE SER DATOS NUMERICOS'
 		END
-	ELSE IF ( EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdCocinero = @IdCocinero))
+	ELSE IF (EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdCocinero = @IdCocinero))
 		BEGIN
 			IF ((@AnniosServicio = '') OR ( @IdEmpleado = ''))
 				BEGIN
 					PRINT 'NO SE PERMITEN CAMPOS VACIOS'
 				END
-			ELSE IF ( EXISTS(SELECT IdPinche FROM Pinches WHERE IdEmpleado = @IdEmpleado))
+			ELSE IF (EXISTS(SELECT IdPinche FROM Pinches WHERE IdEmpleado = @IdEmpleado))
 		
 				BEGIN 
 					PRINT 'ESTE EMPLEADO YA ES UN PINCHE'
 				END
-			ELSE IF ( EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdEmpleado = @IdEmpleado))
-		
+			ELSE IF (EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdEmpleado = @IdEmpleado))
 				BEGIN 
 					PRINT 'ESTE EMPLEADO ES UN COCINERO'
+				END
+			ELSE IF (NOT EXISTS(SELECT Dni FROM Empleados WHERE Dni = @IdEmpleado))
+				BEGIN 
+					PRINT 'ESTE ID EMPLEADO NO EXISTE'
 				END
 			ELSE IF(ISNUMERIC(@AnniosServicio) = 0)
 				BEGIN
 					PRINT  'LOS AÑOS DEBE SER NE FORMATO NUMERICO'
 				END
-			
 			ELSE
 				BEGIN
 					UPDATE Cocineros
 						Set	AnniosServicio = CONVERT(int, @AnniosServicio ),
 							IdEmpleado =  @IdEmpleado
-
-							
-					  WHERE IdCocinero = CONVERT(int, @IdCocinero)
+						WHERE IdCocinero = CONVERT(int, @IdCocinero)
+						PRINT 'SE HA ACTUALIZADO CORRECTAMENTE'
 				END
 		END
 	ELSE
@@ -103,13 +103,11 @@ GO
 -----------------------------------------------ActualizarPinches-------------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarPinches
        @IdPinche varchar(5),
        @IdCocinero varchar(5),
        @FechaNacimiento varchar(10),
 	   @IdEmpleado varchar(12)
-	  
 AS
 	IF (@IdPinche = '')
 		BEGIN
@@ -119,38 +117,40 @@ AS
 	     BEGIN
 		      PRINT  'NUMERO DE ID DEBE SER DATOS NUMERICOS'
 		END
-	ELSE IF ( EXISTS(SELECT IdPinche FROM Pinches WHERE IdPinche = @IdPinche))
+	ELSE IF (EXISTS(SELECT IdPinche FROM Pinches WHERE IdPinche = @IdPinche))
 		BEGIN
 			IF ((@IdCocinero = '') OR ( @FechaNacimiento = '') OR ( @IdEmpleado = ''))
 				BEGIN
 					PRINT 'NO SE PERMITEN CAMPOS VACIOS'
 				END
-			ELSE IF ( EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdEmpleado = @IdEmpleado))
-		
+			ELSE IF(ISNUMERIC(@IdCocinero) = 0)
+				BEGIN
+					PRINT  'EL ID COCINERO DEBE SER FORMATO NUMERICO'
+				END
+			ELSE IF (NOT EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdCocinero = @IdCocinero))
+				BEGIN
+					PRINT 'EL COCINERO NO EXISTE'
+				END
+			ELSE IF(ISDATE(@FechaNacimiento) = 0)
+	           BEGIN
+                    PRINT 'EL FORMATO FECHA NACIMIENTO CORRECTO ES "2000/12/25"'
+               END
+			ELSE IF (EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdEmpleado = @IdEmpleado))
 				BEGIN 
 					PRINT 'ESTE EMLEADO YA ES UN COCINERO'
 				END
-			ELSE IF ( EXISTS(SELECT IdPinche FROM Pinches WHERE IdEmpleado = @IdEmpleado))
-					
+			ELSE IF (EXISTS(SELECT IdPinche FROM Pinches WHERE IdEmpleado = @IdEmpleado))
 				BEGIN 
 					PRINT 'ESTE EMPLEADO ES UN PINCHE'
 				END
-			ELSE IF(ISNUMERIC(@IdCocinero) = 0)
-				BEGIN
-					PRINT  'LOS AÑOS DEBE SER NE FORMATO NUMERICO'
-				END
-		    ELSE IF(ISDATE(@FechaNacimiento) = 0)
-	           BEGIN
-                       PRINT 'EL FORMATO FECHA NACIMIENTO CORRECTO ES "2000/12/25"'
-               END
 		 	ELSE
 				BEGIN
 					UPDATE Pinches
 						Set	IdCocinero = CONVERT(int, @IdCocinero ),
 							FechaNacimiento = CONVERT(date, @FechaNacimiento),
 							IdEmpleado = @IdEmpleado
-							
-					  WHERE IdPinche = CONVERT(int, @IdPinche)
+						WHERE IdPinche = CONVERT(int, @IdPinche)
+						PRINT 'SE HA ACTUALIZADO CORRECTAMENTE'
 				END
 		END
 	ELSE
@@ -161,12 +161,10 @@ GO
 ---------------------------------------------ActualizarPlato------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarPlato
        @IdPlato VARCHAR(10) ,
        @NombrePlato varchar(50), 
-	   @Precio varchar(11)
-	  
+	   @Precio varchar(11)  
 AS
 	IF (@IdPlato = '')
 		BEGIN
@@ -176,7 +174,7 @@ AS
 	     BEGIN
 		      PRINT  'NUMERO DE ID DEBE SER DATOS NUMERICOS'
 		END
-	ELSE IF ( EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
+	ELSE IF (EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
 		BEGIN
 			IF (( @NombrePlato = '') OR ( @Precio = ''))
 				BEGIN
@@ -191,8 +189,8 @@ AS
 					UPDATE Platos
 						Set	NombrePlato = @NombrePlato,
 							Precio = CONVERT(money ,@Precio)
-							
 					  WHERE IdPlato = CONVERT(int, @IdPlato);
+					  PRINT 'SE HA ACTUALIZADO CORRECTAMENTE'
 				END
 		END
 	ELSE
@@ -203,7 +201,6 @@ GO
 -----------------------------------------------ActualizarPlatoEntrante---------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarPlatoEntrante
        @IdEntrante varchar(5),
        @IdPlato varchar(5)	 
@@ -217,9 +214,13 @@ AS
 	    BEGIN
             PRINT 'EL CAMPO ID PLATO DEBE SER DATOS NUMERICOS Y POSITIVO'
         END
-	ELSE IF  (EXISTS(SELECT IdEntrante FROM Entrantes WHERE IdEntrante = @IdEntrante))
+	ELSE IF(EXISTS(SELECT IdEntrante FROM Entrantes WHERE IdEntrante = @IdEntrante))
 		BEGIN
-	        IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
+			IF((@IdPlato = '') OR (ISNUMERIC(@IdPlato) = 0))
+				BEGIN
+					PRINT 'EL ID PLATO NO DEBE SER NULO Y TIENE QUE SER NUMERICO'
+				END
+	        ELSE IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
 			    BEGIN
 					PRINT 'EL ID DE PLATO NO EXISTE'
 				END
@@ -243,7 +244,6 @@ GO
 -----------------------------------------PrimerPlato--------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarPrimerPlato
        @IdPrimerPlato varchar(5),
        @IdPlato varchar(5)	 
@@ -259,7 +259,11 @@ AS
         END
 	ELSE IF  (EXISTS(SELECT IdPrimerPlato FROM PrimerPlato WHERE IdPrimerPlato = @IdPrimerPlato))
 		BEGIN
-	        IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
+			IF((@IdPlato = '') OR (ISNUMERIC(@IdPlato) = 0))
+				BEGIN
+					PRINT 'EL ID PLATO NO DEBE SER NULO Y TIENE QUE SER NUMERICO'
+				END
+	        ELSE IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
 			    BEGIN
 					PRINT 'EL ID DE PLATO NO EXISTE'
 				END
@@ -283,7 +287,6 @@ GO
 --------------------------------------------ActualizarSegundoPlato---------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarSegundoPlato
        @IdSegundoPlato varchar(5),
        @IdPlato varchar(5)	 
@@ -299,7 +302,11 @@ AS
         END
 	ELSE IF  (EXISTS(SELECT IdSegundoPlato FROM SegundoPlato WHERE IdSegundoPlato = @IdSegundoPlato))
 		BEGIN
-	        IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
+			IF((@IdPlato = '') OR (ISNUMERIC(@IdPlato) = 0))
+				BEGIN
+					PRINT 'EL ID PLATO NO DEBE SER NULO Y TIENE QUE SER NUMERICO'
+				END
+	        ELSE IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
 			    BEGIN
 					PRINT 'EL ID DE PLATO NO EXISTE'
 				END
@@ -323,7 +330,6 @@ GO
 --------------------------------------ActualizarPostre--------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarPostre
        @IdPostre varchar(5),
        @IdPlato varchar(5)	 
@@ -339,7 +345,11 @@ AS
         END
 	ELSE IF  (EXISTS(SELECT IdPostre FROM Postres WHERE IdPostre = @IdPostre))
 		BEGIN
-	        IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
+			IF((@IdPlato = '') OR (ISNUMERIC(@IdPlato) = 0))
+				BEGIN
+					PRINT 'EL ID PLATO NO DEBE SER NULO Y TIENE QUE SER NUMERICO'
+				END
+	        ELSE IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato = @IdPlato))
 			    BEGIN
 					PRINT 'EL ID DE PLATO NO EXISTE'
 				END
@@ -381,7 +391,7 @@ AS
 		BEGIN
 			IF (@Nombre = '')
 				BEGIN
-					PRINT 'NO SE PERMITE CAMPOS VACIOS EN NOMBRE'
+					PRINT 'NO SE PERMITE VACIO EL CAMPO NOMBRE'
 				END
 			ELSE
 				BEGIN
@@ -402,7 +412,6 @@ GO
 ----------------------------------------------------------------ActualizarEstante---------------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarEstante
         @IdEstante varchar(5),
 		@NombreEstante varchar(2),
@@ -417,7 +426,6 @@ AS
 		BEGIN
 			PRINT 'EL ID ESTANTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 		END
-
 	ELSE IF (EXISTS(SELECT IdEstante FROM Estantes WHERE IdEstante=@IdEstante))
 		BEGIN
 			IF (@NombreEstante = '') OR (@TamCentimetros ='') OR (@IdAlmecen ='')
@@ -441,14 +449,11 @@ AS
 					UPDATE Estantes
 						Set	NombreEstante = @NombreEstante,
 							TamCentimetros = CONVERT (float , @TamCentimetros),
-							IdAlmecen =  CONVERT (int , @IdAlmecen)
-
-							
-				      WHERE IdEstante = CONVERT(int, @IdEstante);
-					  PRINT 'SE HA ACTUALIZADO CORRECTAMENTE'
+							IdAlmecen =  CONVERT (int , @IdAlmecen)		
+						WHERE IdEstante = CONVERT(int, @IdEstante);
+						PRINT 'SE HA ACTUALIZADO CORRECTAMENTE'
 				END
 		END
-
 	ELSE
         BEGIN
 			PRINT 'EL ESTANTE NO EXISTE'
@@ -465,13 +470,11 @@ GO
 ---------------------------------------------ActualizarPlatoIngredientes--------------------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarPlatoIngredientes
 			@IdPlatoIngrediente varchar(8),
 			@CantidadIngrediente varchar(8),
 			@IdIngrediente varchar(8),
 			@IdPlato varchar(5)
-	  
 AS
 	IF (@IdPlatoIngrediente = '')
 		BEGIN
@@ -481,7 +484,6 @@ AS
 		BEGIN
 			PRINT 'EL ID PLATO INGREDIENTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 		END
-
 	ELSE IF (EXISTS(SELECT IdPlatoIngrediente FROM PlatoIngredientes WHERE IdPlatoIngrediente=@IdPlatoIngrediente))
 		BEGIN
 			IF (@CantidadIngrediente = '') OR (@IdIngrediente ='') OR (@IdPlato ='')
@@ -504,20 +506,17 @@ AS
 				BEGIN
 						PRINT 'EL INGREDIENTE NO EXISTE'
 				END
-			ELSE IF (EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato=@IdPlato ))
+			ELSE IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato=@IdPlato ))
 				BEGIN
-						PRINT 'ESTE PLATO YA EXISTE'
+						PRINT 'ESTE PLATO NO EXISTE'
 				END
-	
 			ELSE
 				BEGIN
 					UPDATE PlatoIngredientes
 						Set	CantidadIngrediente = CONVERT(int, @CantidadIngrediente),
 							IdIngrediente =  CONVERT (int,@IdIngrediente),
 							IdPlato = CONVERT(int, IdIngrediente)
-
-							
-					  WHERE IdPlatoIngrediente = CONVERT(int, @IdPlatoIngrediente)
+						WHERE IdPlatoIngrediente = CONVERT(int, @IdPlatoIngrediente)
 				END
 		END
 	ELSE
@@ -528,12 +527,10 @@ GO
 --------------------------------------ActualizarConocePlato------------------------------------------------------------------
 USE CIELOAZUL
 GO
-
 CREATE PROCEDURE ActualizarConocePlato
 			@IdConocePlato varchar(8),
 			@IdPlato varchar(8),
-			@IdCocinero varchar(8)
-			  
+			@IdCocinero varchar(8)  
 AS
 	IF (@IdConocePlato = '')
 		BEGIN
@@ -543,7 +540,6 @@ AS
 		BEGIN
 			PRINT 'EL ID PLATO INGREDIENTE TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 		END
-
 	ELSE IF (EXISTS(SELECT IdConocePlato FROM ConocePlato WHERE IdConocePlato=@IdConocePlato))
 		BEGIN
 			IF (@IdPlato = '') OR (@IdCocinero ='') 
@@ -554,26 +550,23 @@ AS
 				BEGIN
 					PRINT 'LEL ID PLATO TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 				END
-						ELSE IF((ISNUMERIC(@IdCocinero) = 0) OR (CONVERT(int, @IdCocinero ) < 0))
+			ELSE IF((ISNUMERIC(@IdCocinero) = 0) OR (CONVERT(int, @IdCocinero ) < 0))
 				BEGIN
 					PRINT 'EL ID COCINERO TIENE QUE SER DE CARACTER NUMERICO Y NO DEBE DE SER NEGATIVO'
 				END
-				
-			ELSE IF ( EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato=@IdPlato))
+			ELSE IF (NOT EXISTS(SELECT IdPlato FROM Platos WHERE IdPlato=@IdPlato))
 				BEGIN
-						PRINT 'EL PLATO YA EXISTE'
+						PRINT 'EL PLATO NO EXISTE'
 				END
-			ELSE IF (EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdCocinero=@IdCocinero ))
+			ELSE IF (NOT EXISTS(SELECT IdCocinero FROM Cocineros WHERE IdCocinero=@IdCocinero ))
 				BEGIN
-						PRINT 'ESTE COCINERO YA EXISTE'
+						PRINT 'ESTE COCINERO NO EXISTE'
 				END
-	
 			ELSE
 				BEGIN
 					UPDATE ConocePlato
 						Set	IdPlato = CONVERT(int, @IdPlato),
-							IdCocinero =  CONVERT (int,@IdCocinero)
-							
+							IdCocinero =  CONVERT (int,@IdCocinero)	
 					  WHERE IdConocePlato = CONVERT(int, @IdConocePlato)
 				END
 		END

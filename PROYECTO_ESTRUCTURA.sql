@@ -176,7 +176,6 @@
 
 	USE CIELOAZUL
 	GO 
-
 	CREATE TABLE Auditoria(
 		IdAuditoria int IDENTITY (1,1) NOT NULL,
 		Usuario varchar(20),
