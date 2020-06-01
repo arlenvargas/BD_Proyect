@@ -50,3 +50,5 @@ GO
 
 
 EXEC SP_obtener_diccionario_tabla 'Empleados', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'Cocineros', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'Pinches', 'CIELOAZUL'

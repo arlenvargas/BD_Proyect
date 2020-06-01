@@ -45,5 +45,25 @@ BEGIN
                     @level1type = N'TABLE', @level1name = @table;
 END
 GO
+-- Empleados
 
 EXEC usp_addorupdatedescription 'Empleados', 'Dni', 'Es el numero de cedula del empleado que funciona como PK'
+EXEC usp_addorupdatedescription 'Empleados', 'Nombre', 'Es el nombre del empleado'
+EXEC usp_addorupdatedescription 'Empleados', 'Apellido1', 'Es el primer apellido del empleado'
+EXEC usp_addorupdatedescription 'Empleados', 'Apellido2', 'Es el segundo apellido del empleado'
+EXEC usp_addorupdatedescription 'Empleados', 'NumSeguro', 'Es el numero de seguro del empleado'
+EXEC usp_addorupdatedescription 'Empleados', 'NumTelefono', 'Es el numero de telefono de casa del empleado'
+EXEC usp_addorupdatedescription 'Empleados', 'NumCelular', 'Es el numero de telefono de celular del empleado'
+
+-- Cocinero
+
+EXEC usp_addorupdatedescription 'Cocineros', 'IdCocinero', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Cocineros', 'AnniosServicio', 'Es la cantidad de años de servicio del cocinero'
+EXEC usp_addorupdatedescription 'Cocineros', 'IdEmpleado', 'El el numero de cedula del empleado, es una FK'
+
+-- Pinches
+
+EXEC usp_addorupdatedescription 'Pinches', 'IdPinche', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Pinches', 'IdCocinero', 'Es el identificador de tabla de cocinero, es la FK'
+EXEC usp_addorupdatedescription 'Pinches', 'FechaNacimiento', 'Es la fecha de nacimiento del pinche'
+EXEC usp_addorupdatedescription 'Pinches', 'IdEmpleado', 'El el numero de cedula del empleado, es una FK'
