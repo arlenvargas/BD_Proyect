@@ -170,5 +170,7 @@ EXEC SP_CrearPrepararPlato 1, 3											--Conoce Plato 1 con el Plato 3
 EXEC SP_CrearPrepararPlato 2, 6											--Conoce Plato 2 con el Plato 6
 EXEC SP_CrearPrepararPlato 3, 7											--Conoce Plato 3 con el Plato 7
 
+EXEC SP_ObtenerPreparaPlato
 
+EXEC SP_ObtenerAuditoria
 
