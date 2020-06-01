@@ -52,3 +52,7 @@ GO
 EXEC SP_obtener_diccionario_tabla 'Empleados', 'CIELOAZUL'
 EXEC SP_obtener_diccionario_tabla 'Cocineros', 'CIELOAZUL'
 EXEC SP_obtener_diccionario_tabla 'Pinches', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'Platos', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'Entrantes', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'PrimerPlato', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'SegundoPlato', 'CIELOAZUL'

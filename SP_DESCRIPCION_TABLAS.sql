@@ -67,3 +67,29 @@ EXEC usp_addorupdatedescription 'Pinches', 'IdPinche', 'Es un numero autoincreme
 EXEC usp_addorupdatedescription 'Pinches', 'IdCocinero', 'Es el identificador de tabla de cocinero, es la FK'
 EXEC usp_addorupdatedescription 'Pinches', 'FechaNacimiento', 'Es la fecha de nacimiento del pinche'
 EXEC usp_addorupdatedescription 'Pinches', 'IdEmpleado', 'El el numero de cedula del empleado, es una FK'
+
+-- Platos
+
+EXEC usp_addorupdatedescription 'Platos', 'IdPlato', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Platos', 'NombrePlato', 'Es el nombre del plato'
+EXEC usp_addorupdatedescription 'Platos', 'Precio', 'Es precio del plato'
+
+-- Plato Entrante
+
+EXEC usp_addorupdatedescription 'Entrantes', 'IdEntrante', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Entrantes', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
+
+-- PrimerPlato
+
+EXEC usp_addorupdatedescription 'PrimerPlato', 'IdPrimerPlato', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'PrimerPlato', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
+
+-- SegundoPlato
+
+EXEC usp_addorupdatedescription 'SegundoPlato', 'IdSegundoPlato', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'SegundoPlato', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
+
+-- Postres
+
+EXEC usp_addorupdatedescription 'Postres', 'IdPostre', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Postres', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
