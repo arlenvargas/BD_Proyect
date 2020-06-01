@@ -24,12 +24,12 @@ AS
                 END
             ELSE
                 BEGIN
-                    SELECT IC.COLUMN_NAME,
-                           IC.Data_TYPE,
-                           EP.[Value] as [MS_Description],
-                           IKU.CONSTRAINT_NAME,
-                           ITC.CONSTRAINT_TYPE,
-                           IC.IS_NULLABLE
+                    SELECT IC.COLUMN_NAME AS 'Nombre de las Columnas',
+                           IC.Data_TYPE AS 'Tipo de Dato',
+                           EP.[Value] as [MS_Description] AS 'Descripción del campo',
+                           IKU.CONSTRAINT_NAME AS 'Nombre del Constraint',
+                           ITC.CONSTRAINT_TYPE AS 'Tipo de Constraint',
+                           IC.IS_NULLABLE AS 'Permite Nulo'
                     FROM INFORMATION_SCHEMA.COLUMNS IC
                              INNER JOIN sys.columns sc
                                         ON OBJECT_ID(QUOTENAME(IC.TABLE_SCHEMA) + '.' + QUOTENAME(IC.TABLE_NAME)) =
