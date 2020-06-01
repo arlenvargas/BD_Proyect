@@ -126,6 +126,6 @@ GO
 CREATE PROC SP_ObtenerAuditoria
 AS
 	SELECT 'Id Auditoria' = IdAuditoria, Usuario,
-	'Login Usuario' = LoginUsario, 'Fecha' = Fecha, Descripcion
+	'Login Usuario' = LoginUsuario, 'Fecha' = Fecha, Descripcion
 	FROM Auditoria
 GO
