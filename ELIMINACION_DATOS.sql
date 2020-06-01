@@ -6,20 +6,20 @@ GO
 EXEC SP_EliminarEmpleado '10454879'
 EXEC SP_EliminarEmpleado '21036548'
 EXEC SP_EliminarEmpleado '50123458'
-Exec SP_ObtenerEmpleados 
+EXEC SP_ObtenerEmpleados 
 
 ---Eliminar Cocinero
 USE CIELOAZUL
 GO
 EXEC SP_EliminarCocinero 1
-Exec SP_ObtenerCocineros
+EXEC SP_ObtenerCocineros
 
 
 ---Eliminar Pinche
 USE CIELOAZUL
 GO
 EXEC SP_EliminarPinche 1
-Exec SP_ObtenerPinches
+EXEC SP_ObtenerPinches
 
 
 --Eliminar Plato
@@ -29,59 +29,59 @@ EXEC SP_EliminarPlato 1
 EXEC SP_EliminarPlato 3
 EXEC SP_EliminarPlato 6
 EXEC SP_EliminarPlato 11
-Exec SP_ObtenerPlatos
+EXEC SP_ObtenerPlatos
 
 
 --Eliminar Tipos Platos
 USE CIELOAZUL
 GO
 EXEC SP_EliminarPlatoEntrante 1
-Exec SP_ObtenerEntrantes
+EXEC SP_ObtenerEntrantes
 
 EXEC SP_EliminarPrimerPlato 1
-Exec SP_ObtenerPrimerPlato
+EXEC SP_ObtenerPrimerPlato
 
 EXEC SP_EliminarSegundoPlato 1
-Exe SP_ObtenerSegundoPlato
+EXEC SP_ObtenerSegundoPlato
 
 EXEC SP_EliminarPostre 1
-Exec SP_ObtenerPostres
+EXEC SP_ObtenerPostres
 
 ---Eliminar Almacen
 USE CIELOAZUL
 GO
 EXEC SP_EliminarAlmacen 5
-Exec SP_ObtenerAlmacenes
+EXEC SP_ObtenerAlmacenes
 
 ---Eliminar Estante 
 USE CIELOAZUL
 GO
 EXEC SP_EliminarEstante 1
-Exec SP_ObtenerEstantes
+EXEC SP_ObtenerEstantes
 
 ---Eliminar Ingrediente
 USE CIELOAZUL
 GO
 EXEC SP_EliminarIngrediente 1
-Exec SP_ObtenerIngredientes
+EXEC SP_ObtenerIngredientes
 
 
 ---Eliminar Plato ingrediente 
 USE CIELOAZUL
 GO
 EXEC SP_EliminarPlatoIngrediente 1
-Exec SP_ObtenerPlatosIngredientes
+EXEC SP_ObtenerPlatosIngredientes
 
 ---Eliminar Conoce Plato
 USE CIELOAZUL
 GO
 EXEC SP_EliminarConocePlato 1
-Exec SP_ObtenerConocePlato
+EXEC SP_ObtenerConocePlato
 
 
 ---Eliminar Prepara Plato
 USE CIELOAZUL
 GO
 EXEC SP_EliminarPrepararPlato 1
-Exec SP_ObtenerPreparaPlato
+EXEC SP_ObtenerPreparaPlato
 
