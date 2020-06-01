@@ -526,7 +526,7 @@ GO
 ----------------------------------------------------Validar existencia ingredientes------------------------------------------------------------
 USE CIELOAZUL
 GO
-CREATE PROC SP_VerificaIngrediente 
+CREATE PROC SP_VerificaIngredientes
 	@IdPlato varchar(5)
 AS
 	IF (@IdPlato = '')
