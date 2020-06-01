@@ -58,7 +58,7 @@
 	GO 
 	CREATE TABLE Platos(
 		IdPlato int IDENTITY (1,1) NOT NULL,
-		NombrePlato varchar(50) NOT NULL,
+		NombrePlato varchar(30) NOT NULL,
 		Precio money NOT NULL,
 		CONSTRAINT PK_IdPlato PRIMARY KEY (IdPlato),
 	)
