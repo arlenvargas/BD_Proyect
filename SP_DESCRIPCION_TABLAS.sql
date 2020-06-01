@@ -128,7 +128,7 @@ EXEC usp_addorupdatedescription 'PreparaPlato', 'FechaCreacion', 'Es la fecha qu
 --Auditoria
 EXEC usp_addorupdatedescription 'Auditoria', 'IdAuditoria', 'Es el numero que identificara el usuario que ingreso a la base de datos, funciona como PK'
 EXEC usp_addorupdatedescription 'Auditoria', 'Usuario', 'Es el usuario que ingreso'
-EXEC usp_addorupdatedescription 'Auditoria', 'LoginUsario', 'El nombre de la persona que se logeo e ingreso a la base de datos'
+EXEC usp_addorupdatedescription 'Auditoria', 'LoginUsuario', 'El nombre de la persona que se logeo e ingreso a la base de datos'
 EXEC usp_addorupdatedescription 'Auditoria', 'Fecha', 'Fecha en la que ingreso'
 EXEC usp_addorupdatedescription 'Auditoria', 'Descripcion', 'Descripcion de las acciones que realizo este usuario'
 
