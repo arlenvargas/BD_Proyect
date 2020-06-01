@@ -26,7 +26,7 @@ AS
                 BEGIN
                     SELECT IC.COLUMN_NAME AS 'Nombre de las Columnas',
                            IC.Data_TYPE AS 'Tipo de Dato',
-                           EP.[Value] as [MS_Description] AS 'Descripción del campo',
+                           EP.[Value] AS 'Descripción del campo',
                            IKU.CONSTRAINT_NAME AS 'Nombre del Constraint',
                            ITC.CONSTRAINT_TYPE AS 'Tipo de Constraint',
                            IC.IS_NULLABLE AS 'Permite Nulo'
