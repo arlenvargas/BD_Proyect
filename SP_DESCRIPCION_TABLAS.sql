@@ -1,6 +1,7 @@
 USE CIELOAZUL
 
 -- simplify syntax for maintaining data dictionary
+-- Fuente: https://stackoverflow.com/questions/17173260/check-if-extended-property-description-already-exists-before-adding
 
 IF OBJECT_ID('dbo.usp_addorupdatedescription', 'P') IS NOT NULL
     DROP PROCEDURE dbo.usp_addorupdatedescription;
