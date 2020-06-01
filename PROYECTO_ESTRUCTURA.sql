@@ -3,13 +3,13 @@
 	CREATE DATABASE  CIELOAZUL
 	ON PRIMARY
 	(NAME = 'CIELOAZUL_Data',
-	FILENAME= 'C:\SQLData\CIELOAZUL_Data.Mdf',
+	FILENAME= 'R:\SQLData\CIELOAZUL_Data.Mdf',
 	SIZE = 5Mb,
 	MAXSIZE = 10Mb,
 	FILEGROWTH = 1Mb)
 	LOG ON
 	(NAME = 'CIELOAZUL_Log',
-	FILENAME= 'C:\SQLLog\CIELOAZUL_Log.Ldf',
+	FILENAME= 'R:\SQLLog\CIELOAZUL_Log.Ldf',
 	SIZE = 5Mb,
 	MAXSIZE = 10Mb,
 	FILEGROWTH = 1Mb)
@@ -110,10 +110,11 @@
 		NumAlmacen int NOT NULL,
 		Nombre varchar(40) NOT NULL,
 		Descripcion varchar(100),
-     	CONSTRAINT PK_NumAlmacen PRIMARY KEY (NumAlmacen)
+     	CONSTRAINT PK_NumAlmacen PRIMARY KEY (NumAlmacen),
+		CONSTRAINT CK_NumAlmacen CHECK(NumAlmacen > 0)
   	)
 	GO
-
+	
 	USE CIELOAZUL
 	GO 
 	CREATE TABLE Estantes (
@@ -126,6 +127,7 @@
 	)
 	GO
 
+
 	USE CIELOAZUL
 	GO 
 	CREATE TABLE Ingredientes(
@@ -135,6 +137,7 @@
 		IdEstante int NOT NULL,
 		CONSTRAINT PK_IdIngrediente PRIMARY KEY (IdIngrediente),
 		CONSTRAINT FK_IdEstante_Ingredientes FOREIGN KEY (IdEstante) REFERENCES Estantes(IdEstante) ON DELETE CASCADE,
+		CONSTRAINT CK_CantidadIngredientes CHECK(CantidadIngrediente > 0)
 	)
 	GO
 
@@ -148,6 +151,7 @@
 	   CONSTRAINT PK_Id_PlatoIngrediente PRIMARY KEY (IdPlatoIngrediente),
 	   CONSTRAINT FK_Ingrediente_PlatoIngrediente FOREIGN KEY (IdIngrediente) REFERENCES Ingredientes(IdIngrediente) ON DELETE CASCADE,
 	   CONSTRAINT FK_Plato_PlatoIngrediente FOREIGN KEY (IdPlato) REFERENCES Platos(IdPlato) ON DELETE CASCADE,
+	   CONSTRAINT CK_CantidadIngrediente CHECK(CantidadIngrediente > 0)
 	)
 	GO
 
