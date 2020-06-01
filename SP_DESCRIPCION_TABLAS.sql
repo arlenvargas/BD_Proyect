@@ -1,6 +1,7 @@
 USE CIELOAZUL
 
 -- simplify syntax for maintaining data dictionary
+-- Fuente: https://stackoverflow.com/questions/17173260/check-if-extended-property-description-already-exists-before-adding
 
 IF OBJECT_ID('dbo.usp_addorupdatedescription', 'P') IS NOT NULL
     DROP PROCEDURE dbo.usp_addorupdatedescription;
@@ -65,6 +66,31 @@ EXEC usp_addorupdatedescription 'Pinches', 'IdCocinero', 'Es el identificador de
 EXEC usp_addorupdatedescription 'Pinches', 'FechaNacimiento', 'Es la fecha de nacimiento del pinche'
 EXEC usp_addorupdatedescription 'Pinches', 'IdEmpleado', 'El el numero de cedula del empleado, es una FK'
 
+-- Platos
+
+EXEC usp_addorupdatedescription 'Platos', 'IdPlato', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Platos', 'NombrePlato', 'Es el nombre del plato'
+EXEC usp_addorupdatedescription 'Platos', 'Precio', 'Es precio del plato'
+
+-- Plato Entrante
+
+EXEC usp_addorupdatedescription 'Entrantes', 'IdEntrante', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Entrantes', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
+
+-- PrimerPlato
+
+EXEC usp_addorupdatedescription 'PrimerPlato', 'IdPrimerPlato', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'PrimerPlato', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
+
+-- SegundoPlato
+
+EXEC usp_addorupdatedescription 'SegundoPlato', 'IdSegundoPlato', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'SegundoPlato', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
+
+-- Postres
+
+EXEC usp_addorupdatedescription 'Postres', 'IdPostre', 'Es un numero autoincremental que va aumentado de uno en uno, es la PK'
+EXEC usp_addorupdatedescription 'Postres', 'IdPlato', 'Es numero de identificacion del plato al que esta relacionado'
 --Almacen
 EXEC usp_addorupdatedescription 'Almacenes', 'NumAlmacen', 'Es el numero de identificacion del almacen que funciona como PK'
 EXEC usp_addorupdatedescription 'Almacenes', 'Nombre', 'Es el nombre que se le asignara a cada Almacen'
@@ -73,7 +99,7 @@ EXEC usp_addorupdatedescription 'Almacenes', 'Descripcion', 'Una descripcion ace
 --Estante
 EXEC usp_addorupdatedescription 'Estantes', 'IdEstante', 'Es el numero unico que tendra cada estante que funciona como PK'
 EXEC usp_addorupdatedescription 'Estantes', 'NombreEstante', 'Nombre que tendra cada estante, el cual sera de solo dos caracteres'
-EXEC usp_addorupdatedescription 'Estantes', 'TamCentimetros', 'Es el tamaño en centimetros que tendra cada estante'
+EXEC usp_addorupdatedescription 'Estantes', 'TamCentimetros', 'Es el tamaï¿½o en centimetros que tendra cada estante'
 EXEC usp_addorupdatedescription 'Estantes', 'IdAlmecen', 'Es el numero que identificara a que almacen pertenece el estante, es el FK de Almacenes'
 
 --Ingredientes
@@ -86,7 +112,7 @@ EXEC usp_addorupdatedescription 'Ingredientes', 'IdEstante', 'Es el numero que i
 EXEC usp_addorupdatedescription 'PlatoIngredientes', 'IdPlatoIngrediente', 'Es el numero de identificacion del plato ingrediente que funciona como PK'
 EXEC usp_addorupdatedescription 'PlatoIngredientes', 'CantidadIngrediente', 'La cantidad de ingrediente que se utilizara en los platos'
 EXEC usp_addorupdatedescription 'PlatoIngredientes', 'IdIngrediente', 'Es el numero que identificara que ingrediente se utilizara en el plato, es el FK de Ingredientes'
-EXEC usp_addorupdatedescription 'PlatoIngredientes', 'IdPlato', 'Es el numero que identificara que plato se preparará, es el FK de Platos'
+EXEC usp_addorupdatedescription 'PlatoIngredientes', 'IdPlato', 'Es el numero que identificara que plato se prepararï¿½, es el FK de Platos'
 
 --Conoce plato
 EXEC usp_addorupdatedescription 'ConocePlato', 'IdConocePlato', 'Es el numero de identificacion del conoce plato que funciona como PK'

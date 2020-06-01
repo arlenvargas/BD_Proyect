@@ -1,6 +1,8 @@
 USE CIELOAZUL
 GO
 
+-- Fuente de SP: https://stackoverflow.com/questions/6487885/generating-data-dictionary-for-sql-server-database
+
 CREATE PROC SP_obtener_diccionario_tabla @NombreTabla varchar(20),
                                          @NombreDB varchar(20)
 AS
@@ -52,3 +54,7 @@ GO
 EXEC SP_obtener_diccionario_tabla 'Empleados', 'CIELOAZUL'
 EXEC SP_obtener_diccionario_tabla 'Cocineros', 'CIELOAZUL'
 EXEC SP_obtener_diccionario_tabla 'Pinches', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'Platos', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'Entrantes', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'PrimerPlato', 'CIELOAZUL'
+EXEC SP_obtener_diccionario_tabla 'SegundoPlato', 'CIELOAZUL'
