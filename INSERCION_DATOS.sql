@@ -17,7 +17,7 @@ EXEC SP_CrearEmpleado '42314578','Ruben','Jimenes', 'Carvajal',03114, '26652525'
 EXEC SP_CrearEmpleado '48011246','Emilio','Guzman', 'Carrillo',10324, '26652525', '85858585'
 EXEC SP_CrearEmpleado '50123458','Andres','Elisondo', 'Carrillo',47891, '26652525', '83838383'
 
---SELECT Dni, Nombre, Apellido1, Apellido2, NumSeguro, NumTelefono, NumCelular  FROM Empleados
+EXEC SP_ObtenerEmpleados
 
 --crear Cocineros
 USE CIELOAZUL
@@ -26,7 +26,7 @@ EXEC SP_CrearCocinero 9, '10454879'
 EXEC SP_CrearCocinero 8,'11012145'
 EXEC SP_CrearCocinero 5,'20142657'
 
---SELECT IdCocinero, AnniosServicio, IdEmpleado FROM Cocineros
+EXEC SP_ObtenerCocineros
 
 --crear Pinches
 USE CIELOAZUL
@@ -36,7 +36,8 @@ EXEC SP_CrearPinche  1, '1990/11/10', '22154789'
 EXEC SP_CrearPinche  2, '1987/07/05', '30112455'
 EXEC SP_CrearPinche  2, '1997/04/25', '30214547'
 EXEC SP_CrearPinche  3, '1997/11/05', '41245478'
---SELECT IdPinche,IdCocinero,FechaNacimiento,IdEmpleado  FROM Pinches
+
+EXEC SP_ObtenerPinches
 
 --crear Platos
 USE CIELOAZUL
@@ -58,14 +59,16 @@ EXEC SP_CrearPlato 'Helado de Chocolate', 1400
 EXEC SP_CrearPlato 'Vigoron', 2000
 EXEC SP_CrearPlato 'Chifrijo', 2500
 EXEC SP_CrearPlato 'Olla de carne', 1500
---SELECT IdPlato,NombrePlato,Precio  FROM Platos
+
+EXEC SP_ObtenerPlatos
 
 --Crear Entrantes
 USE CIELOAZUL
 GO
 EXEC SP_CrearPlatoEntrante 1
 EXEC SP_CrearPlatoEntrante 2
---SELECT IdEntrante, IdPlato FROM Entrantes 
+
+EXEC SP_ObtenerEntrantes
 
 --Crear Primer Plato
 USE CIELOAZUL
@@ -73,14 +76,16 @@ GO
 EXEC SP_CrearPrimerPlato 3
 EXEC SP_CrearPrimerPlato 4
 EXEC SP_CrearPrimerPlato 5
---SELECT IdPrimerPlato, IdPlato FROM PrimerPlato 
+
+EXEC SP_ObtenerPrimerPlato
 
 --Crear Segundo Plato
 USE CIELOAZUL
 GO
 EXEC SP_CrearSegundoPlato 6
 EXEC SP_CrearSegundoPlato 7
---SELECT IdSegundoPlato, IdPlato FROM SegundoPlato 
+
+EXEC SP_ObtenerSegundoPlato
 
 --Crear Postre
 USE CIELOAZUL
@@ -88,7 +93,8 @@ GO
 EXEC SP_CrearPostre 8
 EXEC SP_CrearPostre 9
 EXEC SP_CrearPostre 10
---SELECT IdPostre, IdPlato FROM Postres 
+
+EXEC SP_ObtenerPostres
 
 --Crear Almacen
 USE CIELOAZUL
@@ -96,8 +102,8 @@ GO
 EXEC SP_CrearAlmacen 5, 'Almacen Liberia', 'Ubicado en liberia centro'
 EXEC SP_CrearAlmacen 10, 'Almacen Nicoya', 'Ubicado en Nicoya centro'
 EXEC SP_CrearAlmacen 1, 'Almacen Santa Cruz', ''
---SELECT NumAlmacen, Nombre, Descripcion FROM Almacenes
- 
+
+EXEC SP_ObtenerAlmacenes
 
 --Crear Estante
 USE CIELOAZUL
@@ -111,7 +117,8 @@ EXEC SP_CrearEstante 'AA', 100.15, 10
 EXEC SP_CrearEstante 'AB', 95.25,  10
 EXEC SP_CrearEstante 'AC', 75.30,  10
 EXEC SP_CrearEstante 'AD', 95.30,  10
---SELECT IdEstante, NombreEstante, TamCentimetros, IdAlmecen FROM Estantes
+
+EXEC SP_ObtenerEstantes
 
 --Crear Ingredientes
 USE CIELOAZUL
@@ -126,7 +133,8 @@ EXEC SP_CrearIngrediente 'Leche', 70, 5
 EXEC SP_CrearIngrediente 'Cacao', 70, 6
 EXEC SP_CrearIngrediente 'Frijoles', 70, 7
 EXEC SP_CrearIngrediente 'Chile', 70, 8
---SELECT IdIngrediente, NombreIngrediente, CantidadIngrediente, IdEstante FROM Ingredientes
+
+EXEC SP_ObtenerIngredientes
 
 
 --Crear PlatoIngredientes
@@ -141,7 +149,7 @@ EXEC SP_CrearPlatoIngredientes 5,  5, 6
 
 EXEC SP_CrearPlatoIngredientes 5,  5, 7
 
---SELECT IdPlatoIngrediente, CantidadIngrediente, IdIngrediente, IdPlato FROM PlatoIngredientes
+EXEC SP_ObtenerPlatosIngredientes
 
 --Crear Conoce Plato
 USE CIELOAZUL
@@ -149,10 +157,11 @@ GO
 EXEC SP_CrearConocePlato 3, 1												--Plato 3 con el cocinero 1
 EXEC SP_CrearConocePlato 6, 2												--Plato 6 con el cocinero 2
 EXEC SP_CrearConocePlato 7, 3												--Plato 7 con el cocinero 3
---SELECT IdConocePlato, IdPlato, IdCocinero FROM ConocePlato
 
---SELECT IdPlato,NombrePlato,Precio  FROM Platos
---SELECT IdCocinero, AnniosServicio, IdEmpleado FROM Cocineros
+EXEC SP_ObtenerConocePlato
+
+EXEC SP_ObtenerPlatos
+EXEC SP_ObtenerCocineros
 
 --Crear Preparar Plato
 USE CIELOAZUL
@@ -160,5 +169,6 @@ GO
 EXEC SP_CrearPrepararPlato 1, 3											--Conoce Plato 1 con el Plato 3
 EXEC SP_CrearPrepararPlato 2, 6											--Conoce Plato 2 con el Plato 6
 EXEC SP_CrearPrepararPlato 3, 7											--Conoce Plato 3 con el Plato 7
---SELECT IdPreparaPlato, IdConocePlato, IdPlato, FechaCreacion FROM PreparaPlato
+
+EXEC SP_ObtenerPreparaPlato
 
