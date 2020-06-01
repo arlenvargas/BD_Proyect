@@ -180,7 +180,7 @@
 	CREATE TABLE Auditoria(
 		IdAuditoria int IDENTITY (1,1) NOT NULL,
 		Usuario varchar(50),
-		LoginUsario varchar (50),
+		LoginUsuario varchar (50),
 		Fecha date,
 		Descripcion varchar(50)
 		CONSTRAINT PK_IdAuditoria PRIMARY KEY (IdAuditoria)
